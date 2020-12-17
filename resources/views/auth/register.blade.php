@@ -6,17 +6,18 @@
             </a>
         </x-slot>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- Username -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="username" :value="__('Username')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+
+                @error('username')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <!-- Email Address -->
@@ -24,6 +25,10 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+
+                @error('email')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <!-- Password -->
@@ -34,6 +39,10 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
+
+                @error('password')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <!-- Confirm Password -->

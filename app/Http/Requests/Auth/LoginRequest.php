@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
+            'email_or_username' => 'required|string',
             'password' => 'required|string',
         ];
     }
@@ -45,11 +45,17 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->filled('remember'))) {
+        $payload = $this->only('password');
+        $email_or_username = $this->get('email_or_username');
+        filter_var($email_or_username, FILTER_VALIDATE_EMAIL)
+            ? $payload['email'] = $email_or_username
+            : $payload['username'] = $email_or_username;
+
+        if (! Auth::attempt($payload, $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'invalid_credentials' => __('auth.failed'),
             ]);
         }
 
@@ -74,7 +80,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'email_or_username' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -88,6 +94,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email_or_username')).'|'.$this->ip();
     }
 }

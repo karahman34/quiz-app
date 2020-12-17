@@ -28,10 +28,13 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Auth::validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
-        ])) {
+        $payload = $request->only('password');
+        $email_or_username = $request->get('email_or_username');
+        filter_var($email_or_username, FILTER_VALIDATE_EMAIL)
+            ? $payload['email'] = $email_or_username
+            : $payload['username'] = $email_or_username;
+
+        if (! Auth::validate($payload)) {
             return back()->withErrors([
                 'password' => __('auth.password'),
             ]);
