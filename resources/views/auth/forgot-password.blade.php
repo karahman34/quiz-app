@@ -13,9 +13,6 @@
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
@@ -24,6 +21,10 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+
+                @error('email')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <div class="flex items-center justify-end mt-4">

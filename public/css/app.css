@@ -31425,6 +31425,13 @@ select {
           animation: bounce 1s infinite;
 }
 
+.line-divider {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

@@ -6,9 +6,6 @@
             </a>
         </x-slot>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 
@@ -20,6 +17,10 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+
+                @error('email')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <!-- Password -->
@@ -29,6 +30,10 @@
                 </label>
 
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+
+                @error('password')
+                    <x-forms.error-message :message="$message"></x-forms.error-message>
+                @enderror
             </div>
 
             <!-- Confirm Password -->
