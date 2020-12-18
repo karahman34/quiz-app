@@ -21297,6 +21297,18 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Logout Button
+  var logoutButton = document.querySelector('.logout-button');
+
+  if (logoutButton) {
+    var logoutForm = document.querySelector('form#logout-form');
+    logoutButton.addEventListener('click', function () {
+      logoutForm.submit();
+    });
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -21331,14 +21343,26 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/icons.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/icons.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***********************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/css/app.css ***!
-  \***********************************************************/
+/*!***************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/icons.scss ./resources/css/app.css ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /var/www/html/dev/quiz/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/html/dev/quiz/resources/sass/icons.scss */"./resources/sass/icons.scss");
 module.exports = __webpack_require__(/*! /var/www/html/dev/quiz/resources/css/app.css */"./resources/css/app.css");
 
 

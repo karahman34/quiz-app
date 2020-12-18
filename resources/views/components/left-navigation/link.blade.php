@@ -1,0 +1,15 @@
+@props(['url', 'text', 'icon', 'active'])
+
+@php
+    $classes = ($active ?? false)
+                ? 'bg-indigo-100 py-2 flex justify-center cursor-pointer text-lg font-semibold text-indigo-700 hover:text-indigo-900'
+                : 'py-2 flex justify-center cursor-pointer text-lg font-semibold text-gray-500 hover:text-gray-900';
+@endphp
+
+<a 
+  @isset($url) href="{{ $url }}" @endisset 
+  {{ $attributes->merge(['class' => $classes]) }}
+>
+  <span class="mdi mdi-{{ $icon }}"></span>
+  <span class="ml-2">{{ $text }}</span>
+</a>
