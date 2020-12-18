@@ -13,8 +13,8 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        {{-- Icons --}}
-        <link rel="stylesheet" href="{{ asset('css/icons.css') }}">
+        {{-- Additional --}}
+        <link rel="stylesheet" href="{{ asset('css/additional.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
