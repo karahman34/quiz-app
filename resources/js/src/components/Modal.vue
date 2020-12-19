@@ -3,7 +3,7 @@
     <!-- Background -->
     <div class="modal-background bg-gray-900 opacity-70 w-full h-full" @click="emitHideEvent"></div>
     <!-- Modal Content -->
-    <div class="modal-content fixed top-32 left-1/2 transform -translate-x-1/2 w-full md:w-3/4 lg:w-2/6 px-3 md:px-0">
+    <div class="modal-content fixed pt-5 top-0 left-1/2 transform -translate-x-1/2 w-full md:top-1/2 md:w-3/4 lg:w-2/6 px-3 md:px-0 md:py-0 md:-translate-y-1/2">
       <!-- The Card -->
       <div class="bg-white rounded px-5 py-3 ">
         <!-- Slot Header -->
