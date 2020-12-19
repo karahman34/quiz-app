@@ -36,6 +36,7 @@ Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
 Vue.component('dropdown-link', require('./src/components/Form/DropdownLink.vue').default)
 Vue.component('alert', require('./src/components/Alert.vue').default)
 Vue.component('my-button', require('./src/components/Buttons/Button.vue').default)
+Vue.component('my-label', require('./src/components/Form/Label.vue').default)
 Vue.component('my-input', require('./src/components/Form/Input.vue').default)
 
 new Vue({
