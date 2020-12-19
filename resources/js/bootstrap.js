@@ -1,3 +1,4 @@
+window.Vue = require('vue')
 window._ = require('lodash');
 
 /**
@@ -26,3 +27,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+// Components
+Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
+Vue.component('dropdown-link', require('./src/components/Form/DropdownLink.vue').default)
+Vue.component('alert', require('./src/components/Alert.vue').default)
+Vue.component('my-button', require('./src/components/Buttons/Button.vue').default)
+Vue.component('my-input', require('./src/components/Form/Input.vue').default)
+
+new Vue({
+  el: '#app'
+})
