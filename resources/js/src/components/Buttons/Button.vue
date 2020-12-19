@@ -1,6 +1,6 @@
 <template>
   <button 
-    class="py-1 px-3 rounded font-medium focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed" 
+    class="py-1 px-3 rounded font-semibold focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed" 
     :class="[additionalClasses]"
     :type="type" 
     :disabled="disabled"
