@@ -15,7 +15,7 @@ class CreateChoicesTable extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quiz_id')->constrained('quizzes');
+            $table->foreignId('quiz_id')->nullable()->constrained('quizzes');
             $table->string('text');
             $table->enum('is_right', ['N', 'Y'])->default('N');
             $table->timestamps();
