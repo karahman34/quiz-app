@@ -28,6 +28,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
+// Vue Pages
+Vue.component('dashboard-page', require('./src/pages/Dashboard.vue').default)
+
 // Components
 Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
 Vue.component('dropdown-link', require('./src/components/Form/DropdownLink.vue').default)
