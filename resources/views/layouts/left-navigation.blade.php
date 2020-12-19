@@ -1,4 +1,4 @@
-<div class="min-h-screen sticky top-24 border-r-2">
+<div class="min-h-screen sticky top-28 border-r-2">
   {{-- Dashboard --}}
   <x-left-navigation.link text="Dashboard" icon="home" :url="route('dashboard')" :active="request()->routeIs('dashboard')"></x-left-navigation.link>
 

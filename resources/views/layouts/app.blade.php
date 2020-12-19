@@ -27,13 +27,13 @@
         
         <div class="bg-gray-100 min-h-screen">
             {{-- Navigation --}}
-            <div class="fixed w-full z-50">
+            <div class="sticky top-0 z-50">
                 @include('layouts.navigation')
             </div>
 
             <!-- Page Content -->
-            <main class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-                <div class="grid gap-4 grid-cols-12 pt-12">
+            <main id="app" class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 md:py-12">
+                <div class="grid gap-4 grid-cols-12">
                     {{-- Left Navigation --}}
                     <div class="hidden col-span-0 md:block md:col-span-3">
                         <div class="min-h-full">
