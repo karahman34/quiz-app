@@ -50,6 +50,8 @@ export default {
         white: 'bg-white',
         dark: 'bg-gray-800',
         light: 'bg-gray-300',
+        link: 'bg-blue-500',
+        success: 'bg-green-500',
       }
     }
   },
