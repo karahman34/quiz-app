@@ -2,7 +2,7 @@
   <div class="px-4 py-2 bg-white shadow-md rounded">
     <div class="flex">
       <!-- Title -->
-      <a class="font-medium text-lg">{{ packet.title }}</a>
+      <a :href="`/packets/${packet.id}`" class="font-medium text-lg">{{ packet.title }}</a>
 
       <!-- Dropdown Menus -->
       <div class="cursor-pointer mr-0 ml-auto">

@@ -23,6 +23,18 @@ class PacketPolicy
     }
 
     /**
+     * Determine whether the user can create the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Packet  $packet
+     * @return mixed
+     */
+    public function create(User $user, Packet $packet)
+    {
+        return (int) $user->id === (int) $packet->user_id;
+    }
+
+    /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user

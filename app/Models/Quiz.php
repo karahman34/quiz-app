@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Quiz extends Model
 {
@@ -45,5 +46,12 @@ class Quiz extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function imageUrl()
+    {
+        return !$this->image
+            ? null
+            : Storage::disk(self::$disk)->url($this->image->path);
     }
 }

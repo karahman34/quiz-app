@@ -30,6 +30,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // Vue Pages
 Vue.component('dashboard-page', require('./src/pages/Dashboard.vue').default)
+Vue.component('packet-page', require('./src/pages/Packet.vue').default)
 
 // Components
 Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
@@ -38,6 +39,7 @@ Vue.component('alert', require('./src/components/Alert.vue').default)
 Vue.component('my-button', require('./src/components/Buttons/Button.vue').default)
 Vue.component('my-label', require('./src/components/Form/Label.vue').default)
 Vue.component('my-input', require('./src/components/Form/Input.vue').default)
+Vue.component('my-file-input', require('./src/components/Form/FileInput.vue').default)
 
 new Vue({
   el: '#app'

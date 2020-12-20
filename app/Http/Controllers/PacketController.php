@@ -45,6 +45,29 @@ class PacketController extends Controller
     }
 
     /**
+     * Get packet data.
+     *
+     * @param   Packet  $packet
+     *
+     * @return  JsonResponse
+     */
+    public function show(Packet $packet)
+    {
+        $this->authorize('view', $packet);
+
+        $packet->load([
+            'author',
+            'quizzes' => function ($query) {
+                $query->with('image', 'choices', 'choices.image')->withCount('choices');
+            }])
+        ->loadCount(['quizzes']);
+
+        return view('packet', [
+            'packet' => new PacketResource($packet)
+        ]);
+    }
+
+    /**
      * Create packet data.
      *
      * @param   PacketRequest  $request
