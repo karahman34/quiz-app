@@ -42,7 +42,7 @@
               v-model="rightChoice"
               :value="choice.id"
               type="radio"
-              class="cursor-pointer disabled:cursor-not-allowed"
+              class="cursor-pointer disabled:cursor-wait"
               :disabled="changeRightChoiceLoading"
             />
           </template>

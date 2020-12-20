@@ -46376,7 +46376,7 @@ var render = function() {
                                 }
                               ],
                               staticClass:
-                                "cursor-pointer disabled:cursor-not-allowed",
+                                "cursor-pointer disabled:cursor-wait",
                               attrs: {
                                 type: "radio",
                                 disabled: _vm.changeRightChoiceLoading
