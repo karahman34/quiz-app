@@ -4151,6 +4151,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -46335,9 +46337,13 @@ var render = function() {
       _vm._v(" "),
       !_vm.choices.length
         ? [
-            _c("div", { staticClass: "text-lg text-gray-500 font-semibold" }, [
-              _vm._v("No choices.")
-            ])
+            _c(
+              "div",
+              {
+                staticClass: "text-lg text-gray-500 font-medium leading-5 mb-1"
+              },
+              [_vm._v("\n      Has no choice.\n    ")]
+            )
           ]
         : _vm._l(_vm.choices, function(choice) {
             return _c(

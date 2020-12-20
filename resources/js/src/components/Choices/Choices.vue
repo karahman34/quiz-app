@@ -22,7 +22,9 @@
 
     <!-- Empty Choices -->
     <template v-if="!choices.length">
-      <div class="text-lg text-gray-500 font-semibold">No choices.</div>
+      <div class="text-lg text-gray-500 font-medium leading-5 mb-1">
+        Has no choice.
+      </div>
     </template>
 
     <!-- List of Choices -->
