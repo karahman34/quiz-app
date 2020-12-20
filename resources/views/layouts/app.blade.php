@@ -32,17 +32,17 @@
             </div>
 
             <!-- Page Content -->
-            <main id="app" class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 md:py-12">
-                <div class="grid gap-4 grid-cols-12">
+            <main id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex gap-10 relative">
                     {{-- Left Navigation --}}
-                    <div class="hidden col-span-0 md:block md:col-span-3">
-                        <div class="min-h-full">
+                    <div class="flex-shrink-0 min-h-screen hidden md:block">
+                        <div class="h-full border-r-2">
                             @include('layouts.left-navigation')
                         </div>
                     </div>
 
                     {{-- Content --}}
-                    <div class="col-span-12 md:col-span-9">
+                    <div class="py-6 w-full md:py-10">
                         {{ $slot }}
                     </div>
                 </div>
