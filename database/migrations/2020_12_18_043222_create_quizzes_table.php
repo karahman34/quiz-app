@@ -15,7 +15,7 @@ class CreateQuizzesTable extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('packet_id')->nullable()->constrained('packets');
+            $table->foreignId('packet_id')->nullable()->constrained('packets')->onDelete('set null');
             $table->string('text');
             $table->timestamps();
         });
