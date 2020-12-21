@@ -128,6 +128,8 @@ export default {
       if (rightChoice) {
         this.initialRightChoice = true;
         this.rightChoice = rightChoice.id;
+
+        this.$nextTick(() => (this.initialRightChoice = false));
       }
     },
     async changeRightChoice() {
