@@ -1,18 +1,29 @@
 <template>
-  <div class="modal fixed top-0 left-0 z-50 w-screen h-screen overflow-auto">
+  <div class="modal fixed top-0 left-0 z-50 w-screen h-screen">
     <!-- Background -->
-    <div class="modal-background bg-gray-900 opacity-70 w-full h-full" @click="emitHideEvent"></div>
+    <div
+      class="modal-background bg-gray-900 opacity-70 w-full h-full"
+      @click="emitHideEvent"
+    ></div>
+
     <!-- Modal Content -->
-    <div class="modal-content fixed pt-5 top-0 left-1/2 transform -translate-x-1/2 w-full md:top-1/2 md:w-3/4 lg:w-2/6 px-3 md:px-0 md:py-0 md:-translate-y-1/2">
+    <div
+      class="modal-content w-full h-max p-3 fixed top-0 left-0 md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2"
+      :class="modalContentWidth"
+    >
       <!-- The Card -->
-      <div class="bg-white rounded px-5 py-3 ">
+      <div class="bg-white rounded px-4 py-3">
         <!-- Slot Header -->
-        <div class="text-xl text-gray-800 font-semibold mb-2">
+        <div
+          class="text-xl text-gray-800 font-semibold mb-2 border-b border-gray-300"
+        >
           <slot name="header"></slot>
         </div>
 
         <!-- Slot -->
-        <slot></slot>
+        <div class="overflow-auto">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -20,10 +31,31 @@
 
 <script>
 export default {
+  props: {
+    size: {
+      type: String,
+      default: "normal",
+    },
+  },
+
+  computed: {
+    modalContentWidth() {
+      let classes;
+
+      if (this.size === "normal") {
+        classes = "md:w-3/4 lg:w-2/6";
+      } else if (this.size === "stretch") {
+        classes = "md:w-3/4 lg:w-4/5 xl:w-3/6";
+      }
+
+      return classes;
+    },
+  },
+
   methods: {
     emitHideEvent(e) {
-      this.$emit('hide')
-    }
+      this.$emit("hide");
+    },
   },
-}
+};
 </script>
