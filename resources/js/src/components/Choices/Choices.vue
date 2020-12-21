@@ -93,12 +93,15 @@ export default {
       deleteLoading: false,
       rightChoice: null,
       changeRightChoiceLoading: false,
+      initialRightChoice: false,
     };
   },
 
   watch: {
     rightChoice(val) {
-      this.changeRightChoice();
+      if (!this.initialRightChoice) {
+        this.changeRightChoice();
+      }
     },
   },
 
@@ -123,6 +126,7 @@ export default {
       );
 
       if (rightChoice) {
+        this.initialRightChoice = true;
         this.rightChoice = rightChoice.id;
       }
     },
