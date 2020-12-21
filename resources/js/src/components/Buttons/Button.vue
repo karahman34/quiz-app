@@ -1,9 +1,9 @@
 <template>
-  <button 
-    class="py-1 px-3 rounded font-semibold focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed" 
+  <button
+    class="py-1 px-3 rounded font-semibold focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed"
     :class="[additionalClasses]"
-    :type="type" 
-    :disabled="disabled"
+    :type="type"
+    :disabled="disabled || loading"
     @click="$emit('click', $event)"
   >
     <template v-if="loading || disabled">
@@ -22,57 +22,55 @@ export default {
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: 'button'
+      default: "button",
     },
     color: {
       type: String,
-      default: null
+      default: null,
     },
     dark: {
       type: Boolean,
-      default : false
-    }
+      default: false,
+    },
   },
 
   data() {
     return {
       colors: {
-        primary: 'bg-indigo-600 hover:bg-indigo-700',
-        danger: 'bg-red-600 hover:bg-red-700',
-        white: 'bg-white hover:bg-gray-300',
-        dark: 'bg-gray-800 hover:bg-gray-700',
-        light: 'bg-gray-300 hover:bg-gray-200',
-        link: 'bg-blue-500 hover:bg-blue-600',
-        success: 'bg-green-500 hover:bg-green-600',
-      }
-    }
+        primary: "bg-indigo-600 hover:bg-indigo-700",
+        danger: "bg-red-600 hover:bg-red-700",
+        white: "bg-white hover:bg-gray-300",
+        dark: "bg-gray-800 hover:bg-gray-700",
+        light: "bg-gray-300 hover:bg-gray-200",
+        link: "bg-blue-500 hover:bg-blue-600",
+        success: "bg-green-500 hover:bg-green-600",
+      },
+    };
   },
 
   computed: {
     additionalClasses() {
       // Color
-      let color = this.colors.primary
+      let color = this.colors.primary;
       if (this.color !== null) {
         color = this.colors.hasOwnProperty(this.color)
-                  ? this.colors[this.color]
-                  : this.color
+          ? this.colors[this.color]
+          : this.color;
       }
 
       // Dark
-      const fontColor = this.dark === true
-                          ? 'text-white'
-                          : 'text-gray-800'
+      const fontColor = this.dark === true ? "text-white" : "text-gray-800";
 
-      return `${color} ${fontColor}`
-    }
+      return `${color} ${fontColor}`;
+    },
   },
-}
+};
 </script>
