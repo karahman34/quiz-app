@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Packet;
-use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PacketFactory extends Factory
+class QuizFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Packet::class;
+    protected $model = Quiz::class;
 
     /**
      * Define the model's default state.
@@ -22,12 +21,8 @@ class PacketFactory extends Factory
      */
     public function definition()
     {
-        $users = User::select('id')->get();
-        $userIds = $users->pluck('id');
-
         return [
-            'user_id' => $userIds->random(),
-            'title' => $this->faker->sentence
+            'text' => $this->faker->sentence,
         ];
     }
 }
