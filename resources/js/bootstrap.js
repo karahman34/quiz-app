@@ -35,6 +35,7 @@ Vue.component('packet-page', require('./src/pages/Packet.vue').default)
 // Components
 Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
 Vue.component('dropdown-link', require('./src/components/Form/DropdownLink.vue').default)
+Vue.component('dropdown-divider', require('./src/components/Form/DropdownDivider.vue').default)
 Vue.component('alert', require('./src/components/Alert.vue').default)
 Vue.component('my-button', require('./src/components/Buttons/Button.vue').default)
 Vue.component('my-label', require('./src/components/Form/Label.vue').default)
