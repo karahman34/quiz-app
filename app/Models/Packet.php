@@ -35,4 +35,14 @@ class Packet extends Model
     {
         return $this->hasMany(Quiz::class);
     }
+
+    /**
+     * Get Packet's Session.
+     *
+     * @return  HasMany
+     */
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }
