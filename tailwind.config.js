@@ -15,6 +15,7 @@ module.exports = {
         extend: {
             opacity: ['disabled'],
             cursor: ['disabled'],
+            backgroundColor: ['disabled'],
         },
     },
 
