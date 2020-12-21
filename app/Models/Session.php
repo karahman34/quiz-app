@@ -15,6 +15,7 @@ class Session extends Model
         'packet_id',
         'code',
         'available_for',
+        'status',
     ];
 
     /**
