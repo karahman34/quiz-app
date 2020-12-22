@@ -20,7 +20,6 @@ class UserTableSeeder extends Seeder
         
         foreach ($usernames as $username) {
             $user = User::create([
-                'avatar' => null,
                 'username' => $username,
                 'email' => "{$username}@example.com",
                 'password' => $password,
