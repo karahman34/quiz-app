@@ -15,8 +15,8 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('session_id')->constrained('sessions');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('session_id')->constrained('sessions')->onDelete('cascade');
             $table->unsignedDecimal('score')->nullable();
             $table->enum('status', ['on_going', 'finish']);
             $table->timestamp('joined_at');

@@ -35,6 +35,7 @@ class Session extends Model
      */
     public function participants()
     {
-        return $this->belongsToMany(User::class, 'participants', 'session_id', 'user_id');
+        return $this->belongsToMany(User::class, 'participants', 'session_id', 'user_id')
+                        ->withPivot('score', 'status', 'joined_at', 'finished_at');
     }
 }

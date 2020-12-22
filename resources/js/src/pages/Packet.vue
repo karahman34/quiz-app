@@ -52,6 +52,13 @@
               <span class="mdi mdi-trash-can"></span>
               Delete
             </dropdown-link>
+
+            <dropdown-divider></dropdown-divider>
+
+            <dropdown-link @click="listSessionModal = true">
+              <span class="mdi mdi-format-list-bulleted"></span>
+              Sessions List
+            </dropdown-link>
           </template>
         </dropdown>
       </div>
@@ -140,6 +147,13 @@
       @hide="deletePacketModal = false"
       @delete="deletePacket"
     ></delete-modal>
+
+    <!-- List Session Modal -->
+    <list-session-modal
+      v-if="listSessionModal"
+      :packet="packet"
+      @hide="listSessionModal = false"
+    ></list-session-modal>
   </div>
 </template>
 
@@ -149,6 +163,7 @@ import Quiz from "../components/Quiz/Quiz";
 import QuizFormModal from "../components/Quiz/FormModal";
 import DeleteModal from "../components/DeleteModal";
 import EditPacketModal from "../components/Packet/Form";
+import ListSessionModal from "../components/Session/ListModal";
 
 export default {
   components: {
@@ -156,6 +171,7 @@ export default {
     QuizFormModal,
     DeleteModal,
     EditPacketModal,
+    ListSessionModal,
   },
 
   props: {
@@ -175,6 +191,8 @@ export default {
       editPacketModal: false,
       deletePacketModal: false,
       deletePacketLoading: false,
+      createSessionModal: false,
+      listSessionModal: false,
     };
   },
 
