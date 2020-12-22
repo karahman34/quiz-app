@@ -6256,6 +6256,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -6297,6 +6298,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         sort: this.sort,
         order: this.order
       };
+    },
+    onGoingSession: function onGoingSession() {
+      var exist = this.sessions.find(function (session) {
+        return session.status === "on_going";
+      });
+      return exist ? true : false;
     }
   },
   mounted: function mounted() {
@@ -47084,7 +47091,7 @@ var render = function() {
       }
     },
     [
-      _vm.loading || _vm.disabled
+      _vm.loading
         ? [_c("span", { staticClass: "text-xl mdi mdi-loading mdi-spin" })]
         : [_vm._t("default")]
     ],
@@ -49126,7 +49133,11 @@ var render = function() {
                         "my-button",
                         {
                           staticClass: "py-1 uppercase text font-semibold",
-                          attrs: { dark: "", color: "success" },
+                          attrs: {
+                            dark: "",
+                            color: "success",
+                            disabled: _vm.onGoingSession
+                          },
                           on: {
                             click: function($event) {
                               _vm.createSessionModal = true

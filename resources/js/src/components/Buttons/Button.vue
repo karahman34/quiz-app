@@ -6,7 +6,7 @@
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
   >
-    <template v-if="loading || disabled">
+    <template v-if="loading">
       <span class="text-xl mdi mdi-loading mdi-spin"></span>
     </template>
 

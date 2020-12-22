@@ -40,6 +40,7 @@
               dark
               color="success"
               class="py-1 uppercase text font-semibold"
+              :disabled="onGoingSession"
               @click="createSessionModal = true"
             >
               <span class="mdi mdi-plus"></span>
@@ -210,6 +211,13 @@ export default {
         sort: this.sort,
         order: this.order,
       };
+    },
+    onGoingSession() {
+      const exist = this.sessions.find(
+        (session) => session.status === "on_going"
+      );
+
+      return exist ? true : false;
     },
   },
 
