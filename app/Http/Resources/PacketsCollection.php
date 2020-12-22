@@ -16,13 +16,7 @@ class PacketsCollection extends ResourceCollection
     public function toArray($request)
     {
         return $this->resource->map(function (Packet $packet) {
-            return [
-                'id' => $packet->id,
-                'title' => $packet->title,
-                'created_at' => $packet->created_at,
-                'updated_at' => $packet->updated_at,
-                'quizzes_count' => $packet->quizzes_count,
-            ];
+            return new PacketResource($packet);
         });
     }
 }

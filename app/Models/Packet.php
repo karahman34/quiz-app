@@ -14,6 +14,7 @@ class Packet extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'lasts_for',
     ];
 
     /**

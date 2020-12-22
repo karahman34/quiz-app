@@ -24,7 +24,8 @@ class PacketRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'title' => 'required|string|max:255'
+            'title' => 'required|string|max:255',
+            'lasts_for' => 'required|string|date_format:H:i',
         ];
 
         return $rules;

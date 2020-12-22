@@ -22,8 +22,14 @@
               {{ quizzes.length }} Quizzes
             </span>
 
+            <!-- Lasts For -->
+            <span class="mx-2">
+              <span class="mdi mdi-alarm"></span>
+              {{ lastsFor }}
+            </span>
+
             <!-- Created Time -->
-            <span class="ml-3">
+            <span>
               <span class="mdi mdi-calendar"></span>
               <span>{{ formattedCreatedTime(packet.created_at) }}</span>
             </span>
@@ -31,37 +37,36 @@
         </div>
       </div>
 
-      <div>
-        <dropdown>
-          <!-- Trigger -->
-          <template v-slot:trigger="{ trigger }">
-            <span
-              class="mdi mdi-dots-vertical text-2xl cursor-pointer"
-              @click="trigger"
-            ></span>
-          </template>
+      <!-- Dropdown Menus -->
+      <dropdown>
+        <!-- Trigger -->
+        <template v-slot:trigger="{ trigger }">
+          <span
+            class="mdi mdi-dots-vertical text-2xl cursor-pointer"
+            @click="trigger"
+          ></span>
+        </template>
 
-          <!-- Menus -->
-          <template v-slot:menus>
-            <dropdown-link @click="editPacketModal = true">
-              <span class="mdi mdi-pencil"></span>
-              Edit
-            </dropdown-link>
+        <!-- Menus -->
+        <template v-slot:menus>
+          <dropdown-link @click="editPacketModal = true">
+            <span class="mdi mdi-pencil"></span>
+            Edit
+          </dropdown-link>
 
-            <dropdown-link @click="deletePacketModal = true">
-              <span class="mdi mdi-trash-can"></span>
-              Delete
-            </dropdown-link>
+          <dropdown-link @click="deletePacketModal = true">
+            <span class="mdi mdi-trash-can"></span>
+            Delete
+          </dropdown-link>
 
-            <dropdown-divider></dropdown-divider>
+          <dropdown-divider></dropdown-divider>
 
-            <dropdown-link @click="listSessionModal = true">
-              <span class="mdi mdi-format-list-bulleted"></span>
-              Sessions List
-            </dropdown-link>
-          </template>
-        </dropdown>
-      </div>
+          <dropdown-link @click="listSessionModal = true">
+            <span class="mdi mdi-format-list-bulleted"></span>
+            Sessions List
+          </dropdown-link>
+        </template>
+      </dropdown>
     </div>
 
     <!-- No Quizzes -->
@@ -175,7 +180,7 @@ export default {
   },
 
   props: {
-    packet: {
+    initialPacket: {
       type: Object,
       required: true,
     },
@@ -183,6 +188,7 @@ export default {
 
   data() {
     return {
+      packet: {},
       quizzes: [],
       focusQuiz: {},
       showQuizModal: false,
@@ -196,13 +202,32 @@ export default {
     };
   },
 
+  computed: {
+    lastsFor() {
+      const [hours, minutes] = this.packet.lasts_for.split(":");
+
+      return `${hours} hours ${minutes} minutes`;
+    },
+  },
+
+  watch: {
+    packet: {
+      immediate: true,
+      handler(val, old) {
+        this.packet = this.initialPacket;
+      },
+    },
+  },
+
   mounted() {
     this.quizzes = this.packet.quizzes;
   },
 
   methods: {
     packetUpdatedHandler(newPacket) {
-      this.$set(this.packet, "title", newPacket.title);
+      this.packet.title = newPacket.title;
+      // this.packet.lasts_for = newPacket.lasts_for;
+      this.$set(this.packet, "lasts_for", newPacket.lasts_for);
       this.editPacketModal = false;
     },
     formattedCreatedTime(date) {

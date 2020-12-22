@@ -5,6 +5,15 @@
       Create Session
     </template>
 
+    <!-- Alert -->
+    <alert
+      v-if="alertMessage"
+      class="my-2"
+      type="danger"
+      :message="alertMessage"
+      @close="alertMessage = null"
+    ></alert>
+
     <!-- The Form -->
     <form @submit.prevent="createSession">
       <!-- Packet -->
@@ -39,9 +48,11 @@
 
 <script>
 import Modal from "../Modal";
+import Alert from "../Alert";
 
 export default {
   components: {
+    Alert,
     Modal,
   },
 
@@ -58,12 +69,14 @@ export default {
         available_for: 1,
       },
       loading: false,
+      alertMessage: null,
     };
   },
 
   methods: {
     async createSession() {
       this.loading = true;
+      this.alertMessage = null;
 
       try {
         const res = await axios.post(
@@ -74,10 +87,9 @@ export default {
 
         this.$emit("created", data);
       } catch (err) {
-        alert(
+        this.alertMessage =
           err?.response?.data?.message ||
-            "Failed to create session, please try again later."
-        );
+          "Failed to create session, please try again later.";
       } finally {
         this.loading = false;
       }

@@ -2,13 +2,15 @@
   <div class="px-4 py-2 bg-white shadow-md rounded">
     <div class="flex">
       <!-- Title -->
-      <a :href="`/packets/${packet.id}`" class="font-medium text-lg">{{ packet.title }}</a>
+      <a :href="`/packets/${packet.id}`" class="font-medium text-lg">{{
+        packet.title
+      }}</a>
 
       <!-- Dropdown Menus -->
       <div class="cursor-pointer mr-0 ml-auto">
         <dropdown>
           <!-- Trigger -->
-          <template v-slot:trigger="{trigger}">
+          <template v-slot:trigger="{ trigger }">
             <span class="mdi mdi-dots-vertical text-xl" @click="trigger"></span>
           </template>
 
@@ -35,7 +37,7 @@
       <!-- quizzes count -->
       <div class="flex-shrink-0">
         <span class="mdi mdi-book"></span>
-        <span>{{ packet.quizzes_count }} Quizzes</span>
+        <span>{{ packet.quizzes_count || 0 }} Quizzes</span>
       </div>
 
       <!-- Time Created -->
@@ -48,29 +50,29 @@
 </template>
 
 <script>
-  import moment from 'moment'
+import moment from "moment";
 
-  export default {
-    props: {
-      packet: {
-        type: Object,
-        required: true
-      },
+export default {
+  props: {
+    packet: {
+      type: Object,
+      required: true,
     },
+  },
 
-    computed: {
-      createdTime() {
-        return moment(this.packet.created_at).fromNow() 
-      }
+  computed: {
+    createdTime() {
+      return moment(this.packet.created_at).fromNow();
     },
+  },
 
-    methods: {
-      emitEditEvent() {
-        this.$emit('edit', this.packet)
-      },
-      emitDeleteEvent() {
-        this.$emit('delete', this.packet)
-      }
+  methods: {
+    emitEditEvent() {
+      this.$emit("edit", this.packet);
     },
-  }
+    emitDeleteEvent() {
+      this.$emit("delete", this.packet);
+    },
+  },
+};
 </script>

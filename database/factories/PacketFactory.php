@@ -27,7 +27,8 @@ class PacketFactory extends Factory
 
         return [
             'user_id' => $userIds->random(),
-            'title' => $this->faker->sentence
+            'title' => $this->faker->sentence,
+            'lasts_for' => $this->faker->time
         ];
     }
 }
