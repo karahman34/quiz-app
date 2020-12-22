@@ -34,7 +34,7 @@ class UpdateSessionStatusJob implements ShouldQueue
     public function handle()
     {
         $this->session->update([
-            'status' => 'finish'
+            'status' => 'finished'
         ]);
     }
 }
