@@ -240,18 +240,20 @@ class PacketController extends Controller
         $this->authorize('create', $packet);
 
         $request->validate([
-            'available_for' => 'required|numeric|digits_between:1,24',
+            'available_for' => 'required|date_format:H:i',
         ]);
 
         try {
             // Check packet session
             if ($packet->sessions()->where('status', 'on_going')->count() > 0) {
-                return Transformer::fail('There is already an ongoing session', null, 400);
+                return Transformer::fail('There is already an ongoing session', null, 403);
             }
 
             // Validate available for
-            if ((int) $request->get('available_for') > (int) explode(':', $packet->lasts_for)[0]) {
-                return Transformer::fail('The time cannot exceed the packet lasts for times.', null, 400);
+            $packetTime = Carbon::parse($packet->lasts_for);
+            $requestTime = Carbon::parse($request->get('available_for'));
+            if ($packetTime->greaterThan($requestTime)) {
+                return Transformer::fail('Time should be more than the time of the package.', null, 400);
             }
 
             // Create Session

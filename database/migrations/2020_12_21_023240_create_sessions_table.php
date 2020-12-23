@@ -17,7 +17,7 @@ class CreateSessionsTable extends Migration
             $table->id();
             $table->foreignId('packet_id')->constrained('packets');
             $table->string('code', 10);
-            $table->unsignedInteger('available_for');
+            $table->time('available_for');
             $table->enum('status', ['on_going', 'finished']);
             $table->timestamps();
         });

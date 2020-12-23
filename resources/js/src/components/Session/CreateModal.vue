@@ -25,14 +25,26 @@
       <!-- Available For -->
       <div class="mt-2">
         <my-label>Available For</my-label>
-        <select
-          v-model="form.available_for"
-          class="py-1 cursor-pointer rounded"
-        >
-          <option v-for="hour in 24" :key="hour" :value="hour">
-            {{ hour }} hour
-          </option>
-        </select>
+        <div class="flex items-center gap-3">
+          <!-- Hours -->
+          <select v-model="form.hours" class="py-1 cursor-pointer rounded">
+            <option v-for="hour in 24" :key="hour" :value="leadingZero(hour)">
+              {{ hour }} hours
+            </option>
+          </select>
+
+          <!-- Minutes -->
+          <select v-model="form.minutes" class="py-1 cursor-pointer rounded">
+            <option value="00">0 minutes</option>
+            <option
+              v-for="minute in 60"
+              :key="minute"
+              :value="leadingZero(minute)"
+            >
+              {{ minute }} minutes
+            </option>
+          </select>
+        </div>
       </div>
 
       <div class="flex justify-between mt-4">
@@ -66,7 +78,8 @@ export default {
   data() {
     return {
       form: {
-        available_for: 1,
+        hours: "01",
+        minutes: "00",
       },
       loading: false,
       alertMessage: null,
@@ -74,15 +87,17 @@ export default {
   },
 
   methods: {
+    leadingZero(number) {
+      return number >= 10 ? number : `0${number}`;
+    },
     async createSession() {
       this.loading = true;
       this.alertMessage = null;
 
       try {
-        const res = await axios.post(
-          `/packets/${this.packet.id}/sessions`,
-          this.form
-        );
+        const res = await axios.post(`/packets/${this.packet.id}/sessions`, {
+          available_for: `${this.form.hours}:${this.form.minutes}`,
+        });
         const { data } = res.data;
 
         this.$emit("created", data);

@@ -111,7 +111,7 @@
                 </td>
 
                 <td class="px-1 text-center border border-gray-400">
-                  {{ session.available_for }} hours
+                  {{ session.available_for }}
                 </td>
 
                 <td class="px-1 text-center border border-gray-400">

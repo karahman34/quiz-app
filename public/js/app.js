@@ -5995,6 +5995,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6011,13 +6023,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       form: {
-        available_for: 1
+        hours: "01",
+        minutes: "00"
       },
       loading: false,
       alertMessage: null
     };
   },
   methods: {
+    leadingZero: function leadingZero(number) {
+      return number >= 10 ? number : "0".concat(number);
+    },
     createSession: function createSession() {
       var _this = this;
 
@@ -6032,7 +6048,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.alertMessage = null;
                 _context.prev = 2;
                 _context.next = 5;
-                return axios.post("/packets/".concat(_this.packet.id, "/sessions"), _this.form);
+                return axios.post("/packets/".concat(_this.packet.id, "/sessions"), {
+                  available_for: "".concat(_this.form.hours, ":").concat(_this.form.minutes)
+                });
 
               case 5:
                 res = _context.sent;
@@ -48893,47 +48911,110 @@ var render = function() {
             [
               _c("my-label", [_vm._v("Available For")]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.available_for,
-                      expression: "form.available_for"
+              _c("div", { staticClass: "flex items-center gap-3" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.hours,
+                        expression: "form.hours"
+                      }
+                    ],
+                    staticClass: "py-1 cursor-pointer rounded",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form,
+                          "hours",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  ],
-                  staticClass: "py-1 cursor-pointer rounded",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.form,
-                        "available_for",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
+                  },
+                  _vm._l(24, function(hour) {
+                    return _c(
+                      "option",
+                      { key: hour, domProps: { value: _vm.leadingZero(hour) } },
+                      [
+                        _vm._v(
+                          "\n            " + _vm._s(hour) + " hours\n          "
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.minutes,
+                        expression: "form.minutes"
+                      }
+                    ],
+                    staticClass: "py-1 cursor-pointer rounded",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form,
+                          "minutes",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "00" } }, [
+                      _vm._v("0 minutes")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(60, function(minute) {
+                      return _c(
+                        "option",
+                        {
+                          key: minute,
+                          domProps: { value: _vm.leadingZero(minute) }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(minute) +
+                              " minutes\n          "
+                          )
+                        ]
                       )
-                    }
-                  }
-                },
-                _vm._l(24, function(hour) {
-                  return _c(
-                    "option",
-                    { key: hour, domProps: { value: hour } },
-                    [_vm._v("\n          " + _vm._s(hour) + " hour\n        ")]
-                  )
-                }),
-                0
-              )
+                    })
+                  ],
+                  2
+                )
+              ])
             ],
             1
           ),
@@ -49315,7 +49396,7 @@ var render = function() {
                                   _vm._v(
                                     "\n                " +
                                       _vm._s(session.available_for) +
-                                      " hours\n              "
+                                      "\n              "
                                   )
                                 ]
                               ),
