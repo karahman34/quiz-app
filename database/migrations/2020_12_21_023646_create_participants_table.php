@@ -18,7 +18,7 @@ class CreateParticipantsTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('session_id')->constrained('sessions')->onDelete('cascade');
             $table->unsignedDecimal('score')->nullable();
-            $table->enum('status', ['on_going', 'finish']);
+            $table->enum('status', ['on_going', 'finished']);
             $table->timestamp('joined_at');
             $table->timestamp('finished_at')->nullable();
         });

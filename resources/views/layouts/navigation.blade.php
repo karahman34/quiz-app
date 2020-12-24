@@ -69,6 +69,12 @@
         </div>
 
         <div class="space-y-1">
+            <x-responsive-nav-link :href="route('session.view.join')" :active="false">
+                {{ __('Join Session') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="space-y-1">
             <x-responsive-nav-link href="/" :active="false">
                 {{ __('Activities') }}
             </x-responsive-nav-link>

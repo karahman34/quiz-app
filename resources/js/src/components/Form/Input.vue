@@ -12,8 +12,9 @@
       class="rounded shadow-sm w-full border-gray-400 outline-none focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-300"
       :class="[dense ? 'py-1' : 'py-2', { 'pl-7': icon }]"
       :type="type"
-      :placeholder="placeholder"
       :disabled="readonly"
+      :autofocus="autofocus"
+      :placeholder="placeholder"
     />
   </div>
 </template>
@@ -42,6 +43,10 @@ export default {
       default: false,
     },
     readonly: {
+      type: Boolean,
+      default: false,
+    },
+    autofocus: {
       type: Boolean,
       default: false,
     },
