@@ -7,7 +7,7 @@
     @click="$emit('click', $event)"
   >
     <template v-if="loading">
-      <span class="text-xl mdi mdi-loading mdi-spin"></span>
+      <span class="text-lg mdi mdi-loading mdi-spin"></span>
     </template>
 
     <template v-else>
