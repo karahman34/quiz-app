@@ -23,13 +23,16 @@
         </div>
 
         <!-- Submit -->
-        <my-button
-          dark
-          type="submit"
-          class="flex-shrink-0 h-10"
-          :loading="firstForm.loading"
-          >Submit</my-button
-        >
+        <div>
+          <my-button
+            dark
+            type="submit"
+            class="py-1"
+            :disabled="firstForm.code === ''"
+            :loading="firstForm.loading"
+            >Submit</my-button
+          >
+        </div>
       </div>
     </form>
 

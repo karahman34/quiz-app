@@ -7103,6 +7103,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
 
 
 
@@ -48976,7 +48978,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "span",
-    { staticClass: "inline-block mt-0.5 text-red-600" },
+    { staticClass: "inline-block text-sm font-medium text-red-600 mt-0.5" },
     [_vm._t("default")],
     2
   )
@@ -50901,51 +50903,52 @@ var render = function() {
             [
               _c("my-label", [_vm._v("Enter the session code")]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex items-start gap-3" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "w-full" },
-                    [
-                      _c("my-input", {
-                        staticClass: "inline-block w-full",
-                        attrs: { placeholder: "Code", autofocus: "" },
-                        model: {
-                          value: _vm.firstForm.code,
-                          callback: function($$v) {
-                            _vm.$set(_vm.firstForm, "code", $$v)
-                          },
-                          expression: "firstForm.code"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.firstForm.error
-                        ? _c("validation-message", [
-                            _vm._v(_vm._s(_vm.firstForm.error))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "my-button",
-                    {
-                      staticClass: "flex-shrink-0 py-1",
-                      attrs: {
-                        dark: "",
-                        type: "submit",
-                        disabled: _vm.firstForm.code === "",
-                        loading: _vm.firstForm.loading
+              _c("div", { staticClass: "flex gap-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "w-full" },
+                  [
+                    _c("my-input", {
+                      staticClass: "inline-block w-full",
+                      attrs: { placeholder: "Code", autofocus: "" },
+                      model: {
+                        value: _vm.firstForm.code,
+                        callback: function($$v) {
+                          _vm.$set(_vm.firstForm, "code", $$v)
+                        },
+                        expression: "firstForm.code"
                       }
-                    },
-                    [_vm._v("Submit")]
-                  )
-                ],
-                1
-              )
+                    }),
+                    _vm._v(" "),
+                    _vm.firstForm.error
+                      ? _c("validation-message", [
+                          _vm._v(_vm._s(_vm.firstForm.error))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  [
+                    _c(
+                      "my-button",
+                      {
+                        staticClass: "py-1",
+                        attrs: {
+                          dark: "",
+                          type: "submit",
+                          disabled: _vm.firstForm.code === "",
+                          loading: _vm.firstForm.loading
+                        }
+                      },
+                      [_vm._v("Submit")]
+                    )
+                  ],
+                  1
+                )
+              ])
             ],
             1
           )
