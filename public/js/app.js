@@ -49451,7 +49451,7 @@ var render = function() {
         ? _c(
             "my-button",
             {
-              staticClass: "w-full opacity-60 hover:opacity-100",
+              staticClass: "w-full opacity-70 hover:opacity-100",
               attrs: { dark: "" },
               on: { click: _vm.getPackets }
             },

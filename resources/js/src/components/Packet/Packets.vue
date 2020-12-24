@@ -36,18 +36,14 @@
 
       <div>
         <!-- Create Button -->
-        <a
-          class="bg-indigo-600 h-full rounded py-1 px-3 cursor-pointer text-white text font-bold"
-          @click="packetFormModal = true"
-        >
+        <my-button dark @click="packetFormModal = true">
           <span class="mdi mdi-plus"></span>
           <span>Packet</span>
-        </a>
+        </my-button>
 
         <!-- Search on dekstop -->
         <my-input
           v-model="search"
-          dense
           icon="mdi mdi-magnify"
           class="hidden md:inline-block md:ml-1"
           placeholder="Search.."
@@ -66,9 +62,7 @@
 
     <!-- No Packets -->
     <template v-if="!loading && !packets.length">
-      <div class="text-center text-xl my-5 text-gray-500">
-        You has no packets yet.
-      </div>
+      <div class="text-xl my-5 text-gray-500">You have no packets yet.</div>
     </template>
 
     <!-- List of Packets -->
@@ -92,15 +86,20 @@
     <!-- Get Packets Loading -->
     <template v-if="loading">
       <div class="my-5 text-center text-gray-500">
-        <span class="block text-xl mb-1">Getting data...</span>
+        <span class="block text-xl mb-1">Getting Packets data...</span>
         <span class="text-3xl mdi mdi-loading mdi-spin"></span>
       </div>
     </template>
 
     <!-- Load More Button -->
-    <my-button v-if="next && !loading" dark class="w-full" @click="getPackets">
+    <my-button
+      v-if="next && !loading"
+      dark
+      class="w-full opacity-70 hover:opacity-100"
+      @click="getPackets"
+    >
       <span class="mdi mdi-eye"></span>
-      Load More
+      <span class="inline-block ml-1">Load More</span>
     </my-button>
   </div>
 </template>
