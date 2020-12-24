@@ -1,4 +1,9 @@
 <x-app-layout>
+    {{-- Title --}}
+    <x-slot name="title">
+        Dashboard
+    </x-slot>
+    
     {{-- Session Success --}}
     @if (session('session.success') === true)
         <div class="bg-green-500 py-2 px-3 rounded text-white font-semibold mb-2">
