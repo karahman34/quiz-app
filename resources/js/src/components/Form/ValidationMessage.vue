@@ -1,5 +1,5 @@
 <template>
-  <span class="inline-block mt-0.5 text-red-600">
+  <span class="inline-block text-sm font-medium text-red-600 mt-0.5">
     <slot></slot>
   </span>
 </template>
