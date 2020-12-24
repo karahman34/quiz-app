@@ -82,7 +82,7 @@ class PacketController extends Controller
     {
         try {
             $packet = Packet::create(array_merge(
-                $request->only('title', 'lasts_for'),
+                $request->only('title'),
                 ['user_id' => Auth::id()]
             ));
                 
@@ -108,7 +108,7 @@ class PacketController extends Controller
 
         try {
             $packet->update(
-                $request->only('title', 'lasts_for')
+                $request->only('title')
             );
 
             $packet->refresh();
@@ -247,13 +247,6 @@ class PacketController extends Controller
             // Check packet session
             if ($packet->sessions()->where('status', 'on_going')->count() > 0) {
                 return Transformer::fail('There is already an ongoing session', null, 403);
-            }
-
-            // Validate available for
-            $packetTime = Carbon::parse($packet->lasts_for);
-            $requestTime = Carbon::parse($request->get('available_for'));
-            if ($packetTime->greaterThan($requestTime)) {
-                return Transformer::fail('Time should be more than the time of the package.', null, 400);
             }
 
             // Create Session

@@ -15,17 +15,11 @@
             {{ packet.title }}
           </span>
 
-          <div class="text-gray-500">
+          <div class="flex gap-2 text-gray-500">
             <!-- Quizzes Count -->
             <span>
               <span class="mdi mdi-paper-cut-vertical"></span>
               {{ quizzes.length }} Quizzes
-            </span>
-
-            <!-- Lasts For -->
-            <span class="mx-2">
-              <span class="mdi mdi-alarm"></span>
-              {{ lastsFor }}
             </span>
 
             <!-- Created Time -->
@@ -202,14 +196,6 @@ export default {
     };
   },
 
-  computed: {
-    lastsFor() {
-      const [hours, minutes] = this.packet.lasts_for.split(":");
-
-      return `${hours} hours ${minutes} minutes`;
-    },
-  },
-
   watch: {
     packet: {
       immediate: true,
@@ -226,8 +212,6 @@ export default {
   methods: {
     packetUpdatedHandler(newPacket) {
       this.packet.title = newPacket.title;
-      // this.packet.lasts_for = newPacket.lasts_for;
-      this.$set(this.packet, "lasts_for", newPacket.lasts_for);
       this.editPacketModal = false;
     },
     formattedCreatedTime(date) {

@@ -28,34 +28,6 @@
           </validation-message>
         </div>
 
-        <!-- Lasts For -->
-        <div class="mt-3">
-          <my-label>Lasts For</my-label>
-          <div class="flex items-center gap-3">
-            <!-- Hours -->
-            <select v-model="form.hours" class="py-1 border rounded">
-              <option v-for="hour in 24" :key="hour" :value="leadingZero(hour)">
-                {{ hour }} hours
-              </option>
-            </select>
-
-            <!-- Minutes -->
-            <select v-model="form.minutes" class="py-1 border rounded">
-              <option value="00">0 minutes</option>
-              <option
-                v-for="minute in 60"
-                :key="minute"
-                :value="leadingZero(minute)"
-              >
-                {{ minute }} minutes
-              </option>
-              <validation-message v-show="errors.lasts_for">
-                {{ errors.lasts_for }}
-              </validation-message>
-            </select>
-          </div>
-        </div>
-
         <!-- Submit -->
         <my-button
           dark
@@ -97,12 +69,9 @@ export default {
     return {
       form: {
         title: "",
-        hours: "01",
-        minutes: "00",
       },
       errors: {
         title: null,
-        lasts_for: null,
       },
       loading: false,
     };
@@ -120,10 +89,6 @@ export default {
       handler(val) {
         if (val === true) {
           this.form.title = this.packet.title;
-
-          const [hours, minutes] = this.packet.lasts_for.split(":");
-          this.form.hours = hours;
-          this.form.minutes = minutes;
         }
       },
     },
@@ -141,7 +106,6 @@ export default {
       const payload = {};
       if (this.isEdit) payload._method = "PATCH";
       payload.title = this.form.title;
-      payload.lasts_for = `${this.form.hours}:${this.form.minutes}`;
 
       return this.isEdit ? this.update(payload) : this.create(payload);
     },

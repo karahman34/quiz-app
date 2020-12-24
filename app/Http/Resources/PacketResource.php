@@ -17,7 +17,6 @@ class PacketResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'lasts_for' => $this->lasts_for,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'author' => $this->author,

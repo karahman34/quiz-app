@@ -5019,46 +5019,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5125,13 +5085,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   data: function data() {
     return {
       form: {
-        title: "",
-        hours: "01",
-        minutes: "00"
+        title: ""
       },
       errors: {
-        title: null,
-        lasts_for: null
+        title: null
       },
       loading: false
     };
@@ -5147,14 +5104,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       handler: function handler(val) {
         if (val === true) {
           this.form.title = this.packet.title;
-
-          var _this$packet$lasts_fo = this.packet.lasts_for.split(":"),
-              _this$packet$lasts_fo2 = _slicedToArray(_this$packet$lasts_fo, 2),
-              hours = _this$packet$lasts_fo2[0],
-              minutes = _this$packet$lasts_fo2[1];
-
-          this.form.hours = hours;
-          this.form.minutes = minutes;
         }
       }
     }
@@ -5170,7 +5119,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var payload = {};
       if (this.isEdit) payload._method = "PATCH";
       payload.title = this.form.title;
-      payload.lasts_for = "".concat(this.form.hours, ":").concat(this.form.minutes);
       return this.isEdit ? this.update(payload) : this.create(payload);
     },
     create: function create(payload) {
@@ -7076,24 +7024,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7287,16 +7217,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       listSessionModal: false
     };
   },
-  computed: {
-    lastsFor: function lastsFor() {
-      var _this$packet$lasts_fo = this.packet.lasts_for.split(":"),
-          _this$packet$lasts_fo2 = _slicedToArray(_this$packet$lasts_fo, 2),
-          hours = _this$packet$lasts_fo2[0],
-          minutes = _this$packet$lasts_fo2[1];
-
-      return "".concat(hours, " hours ").concat(minutes, " minutes");
-    }
-  },
   watch: {
     packet: {
       immediate: true,
@@ -7310,9 +7230,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   methods: {
     packetUpdatedHandler: function packetUpdatedHandler(newPacket) {
-      this.packet.title = newPacket.title; // this.packet.lasts_for = newPacket.lasts_for;
-
-      this.$set(this.packet, "lasts_for", newPacket.lasts_for);
+      this.packet.title = newPacket.title;
       this.editPacketModal = false;
     },
     formattedCreatedTime: function formattedCreatedTime(date) {
@@ -48980,146 +48898,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "mt-3" },
-                [
-                  _c("my-label", [_vm._v("Lasts For")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex items-center gap-3" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.hours,
-                            expression: "form.hours"
-                          }
-                        ],
-                        staticClass: "py-1 border rounded",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "hours",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      _vm._l(24, function(hour) {
-                        return _c(
-                          "option",
-                          {
-                            key: hour,
-                            domProps: { value: _vm.leadingZero(hour) }
-                          },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(hour) +
-                                " hours\n            "
-                            )
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.minutes,
-                            expression: "form.minutes"
-                          }
-                        ],
-                        staticClass: "py-1 border rounded",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "minutes",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "00" } }, [
-                          _vm._v("0 minutes")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(60, function(minute) {
-                          return _c(
-                            "option",
-                            {
-                              key: minute,
-                              domProps: { value: _vm.leadingZero(minute) }
-                            },
-                            [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(minute) +
-                                  " minutes\n            "
-                              )
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "validation-message",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.lasts_for,
-                                expression: "errors.lasts_for"
-                              }
-                            ]
-                          },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(_vm.errors.lasts_for) +
-                                "\n            "
-                            )
-                          ]
-                        )
-                      ],
-                      2
-                    )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
                 "my-button",
                 {
                   staticClass: "w-full mt-3 mb-1",
@@ -50928,20 +50706,13 @@ var render = function() {
                 _vm._v("\n          " + _vm._s(_vm.packet.title) + "\n        ")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "text-gray-500" }, [
+              _c("div", { staticClass: "flex gap-2 text-gray-500" }, [
                 _c("span", [
                   _c("span", { staticClass: "mdi mdi-paper-cut-vertical" }),
                   _vm._v(
                     "\n            " +
                       _vm._s(_vm.quizzes.length) +
                       " Quizzes\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "mx-2" }, [
-                  _c("span", { staticClass: "mdi mdi-alarm" }),
-                  _vm._v(
-                    "\n            " + _vm._s(_vm.lastsFor) + "\n          "
                   )
                 ]),
                 _vm._v(" "),
