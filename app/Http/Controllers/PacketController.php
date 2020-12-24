@@ -15,6 +15,7 @@ use App\Http\Requests\PacketRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PacketResource;
 use App\Http\Resources\PacketsCollection;
+use App\Jobs\CreateActivityJob;
 use App\Jobs\UpdateSessionStatusJob;
 use App\Models\Session;
 use Carbon\Carbon;
@@ -259,6 +260,9 @@ class PacketController extends Controller
             // Update Session status
             UpdateSessionStatusJob::dispatch($session)
                                     ->delay(Carbon::now()->addHours((int) $session->available_for));
+
+            // Create activity
+            CreateActivityJob::dispatch(Auth::user(), "You entered session #{$session->code}.");
 
             return Transformer::ok('Success to create session.', $session);
         } catch (\Throwable $th) {

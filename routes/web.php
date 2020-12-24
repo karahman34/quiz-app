@@ -26,3 +26,4 @@ require __DIR__.'/packets.php';
 require __DIR__.'/quizzes.php';
 require __DIR__.'/choices.php';
 require __DIR__.'/sessions.php';
+require __DIR__.'/activities.php';

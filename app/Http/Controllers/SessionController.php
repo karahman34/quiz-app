@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Transformer;
 use App\Http\Resources\SessionResource;
+use App\Jobs\CreateActivityJob;
 use App\Models\Session;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -219,15 +220,19 @@ class SessionController extends Controller
             }
 
             // Finish the user
+            $score = $this->calculateScore($session, $request->get('quizzes'), $request->get('answers'));
             $session->participants()->wherePivot('user_id', Auth::id())->updateExistingPivot(Auth::id(), [
                 'status' => 'finished',
-                'score' => $this->calculateScore($session, $request->get('quizzes'), $request->get('answers')),
+                'score' => $score,
                 'finished_at' => $now,
             ]);
 
             $request->session()->forget('session.working');
             $request->session()->forget('session.code');
             $request->session()->flash('session.success', true);
+
+            // Create activity
+            CreateActivityJob::dispatch(Auth::user(), "You have finished the session of #{$session->code} and got {$score} points.");
 
             return Transformer::ok('Success to store user score.', $session->participants()->wherePivot('user_id', Auth::id())->first());
         } catch (\Throwable $th) {

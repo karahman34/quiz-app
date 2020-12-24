@@ -5,9 +5,6 @@
   {{-- Join --}}
   <x-left-navigation.link text="Join Session" icon="share" :url="route('session.view.join')" :active="request()->routeIs('session.view.join')"></x-left-navigation.link>
 
-  {{-- Activities --}}
-  <x-left-navigation.link text="Activities" icon="history" url="/" :active="false"></x-left-navigation.link>
-
   {{-- Logout --}}
   <x-left-navigation.link class="logout-button" text="Logout" icon="logout"></x-left-navigation.link>
 </div>
