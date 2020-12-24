@@ -5586,10 +5586,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -48816,8 +48812,9 @@ var render = function() {
       _vm.icon
         ? [
             _c("span", {
-              staticClass: "absolute left-2 text-gray-500",
-              class: [_vm.icon, _vm.dense ? "text-lg" : "text-xl"]
+              staticClass:
+                "absolute left-2 transform -translate-y-1/2 top-1/2 text-gray-500",
+              class: [_vm.icon, _vm.dense ? "text-base" : "text-lg"]
             })
           ]
         : _vm._e(),
@@ -49367,10 +49364,9 @@ var render = function() {
             "div",
             [
               _c(
-                "a",
+                "my-button",
                 {
-                  staticClass:
-                    "bg-indigo-600 h-full rounded py-1 px-3 cursor-pointer text-white text font-semibold",
+                  attrs: { dark: "" },
                   on: {
                     click: function($event) {
                       _vm.packetFormModal = true
@@ -49386,11 +49382,7 @@ var render = function() {
               _vm._v(" "),
               _c("my-input", {
                 staticClass: "hidden md:inline-block md:ml-1",
-                attrs: {
-                  dense: "",
-                  icon: "mdi mdi-magnify",
-                  placeholder: "Search.."
-                },
+                attrs: { icon: "mdi mdi-magnify", placeholder: "Search.." },
                 model: {
                   value: _vm.search,
                   callback: function($$v) {
