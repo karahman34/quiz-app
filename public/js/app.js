@@ -3966,6 +3966,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3980,6 +4002,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: true,
       next: null,
       page: 1,
+      order: "new",
       // Delete
       alertType: null,
       alertMessage: null,
@@ -3987,6 +4010,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       focusActivity: null,
       deleteModal: false
     };
+  },
+  watch: {
+    order: function order() {
+      this.page = 1;
+      this.activities = [];
+      this.getActivities();
+    }
   },
   mounted: function mounted() {
     this.getActivities();
@@ -4010,7 +4040,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 4;
                 return axios.get("/activities", {
                   params: {
-                    page: _this.page
+                    page: _this.page,
+                    order: _this.order
                   }
                 });
 
@@ -5480,7 +5511,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -47987,7 +48017,48 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "mb-2" }, [
+        _c("div", { staticClass: "flex justify-between items-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order,
+                    expression: "order"
+                  }
+                ],
+                staticClass: "cursor-pointer py-1 rounded",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.order = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "new" } }, [_vm._v("New")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "old" } }, [_vm._v("Old")])
+              ]
+            )
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _vm.loading
         ? [_vm._m(1)]
@@ -48034,7 +48105,19 @@ var render = function() {
                 ])
               }),
               0
-            )
+            ),
+            _vm._v(" "),
+            !_vm.loading && _vm.next
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "pl-6 cursor-pointer text-gray-700 font-medium",
+                    on: { click: _vm.getActivities }
+                  },
+                  [_vm._v("\n      See More\n    ")]
+                )
+              : _vm._e()
           ],
       _vm._v(" "),
       _vm.deleteModal
@@ -48063,7 +48146,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-xl mb-2" }, [
+    return _c("div", { staticClass: "text-xl" }, [
       _c("span", { staticClass: "mdi mdi-history" }),
       _vm._v(" "),
       _c("span", [_vm._v("Activities")])
@@ -49401,7 +49484,7 @@ var render = function() {
       _vm._v(" "),
       _c("my-input", {
         staticClass: "mt-3 block md:hidden",
-        attrs: { dense: "", icon: "mdi mdi-magnify", placeholder: "Search.." },
+        attrs: { icon: "mdi mdi-magnify", placeholder: "Search.." },
         model: {
           value: _vm.search,
           callback: function($$v) {
@@ -67512,9 +67595,9 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_4__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\dev\quiz-app\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\xampp\htdocs\dev\quiz-app\resources\sass\additional.scss */"./resources/sass/additional.scss");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\dev\quiz-app\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /var/www/html/dev/quiz/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/html/dev/quiz/resources/sass/additional.scss */"./resources/sass/additional.scss");
+module.exports = __webpack_require__(/*! /var/www/html/dev/quiz/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -54,7 +54,6 @@
     <!-- Search on mobile -->
     <my-input
       v-model="search"
-      dense
       icon="mdi mdi-magnify"
       class="mt-3 block md:hidden"
       placeholder="Search.."

@@ -10,9 +10,22 @@
     ></alert>
 
     <!-- Header -->
-    <div class="text-xl mb-2">
-      <span class="mdi mdi-history"></span>
-      <span>Activities</span>
+    <div class="mb-2">
+      <div class="flex justify-between items-center">
+        <!-- Title -->
+        <div class="text-xl">
+          <span class="mdi mdi-history"></span>
+          <span>Activities</span>
+        </div>
+
+        <!-- Select Order -->
+        <div>
+          <select v-model="order" class="cursor-pointer py-1 rounded">
+            <option value="new">New</option>
+            <option value="old">Old</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <!-- Loading -->
@@ -55,6 +68,15 @@
           </div>
         </li>
       </ul>
+
+      <!-- See More Text-->
+      <div
+        v-if="!loading && next"
+        class="pl-6 cursor-pointer text-gray-700 font-medium"
+        @click="getActivities"
+      >
+        See More
+      </div>
     </template>
 
     <!-- Delete Modal -->
@@ -85,6 +107,7 @@ export default {
       loading: true,
       next: null,
       page: 1,
+      order: "new",
       // Delete
       alertType: null,
       alertMessage: null,
@@ -92,6 +115,14 @@ export default {
       focusActivity: null,
       deleteModal: false,
     };
+  },
+
+  watch: {
+    order() {
+      this.page = 1;
+      this.activities = [];
+      this.getActivities();
+    },
   },
 
   mounted() {
@@ -109,6 +140,7 @@ export default {
         const res = await axios.get("/activities", {
           params: {
             page: this.page,
+            order: this.order,
           },
         });
         const { data, links } = res.data;
