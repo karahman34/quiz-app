@@ -91,15 +91,15 @@
     </template>
 
     <!-- Load More Button -->
-    <my-button
-      v-if="next && !loading"
-      dark
-      class="w-full opacity-70 hover:opacity-100"
-      @click="getPackets"
-    >
-      <span class="mdi mdi-eye"></span>
-      <span class="inline-block ml-1">Load More</span>
-    </my-button>
+    <div v-if="next && !loading" class="flex justify-center mt-4">
+      <my-button
+        dark
+        class="opacity-70 py-1 font-semibold"
+        @click="getPackets"
+      >
+        <span class="inline-block ml-1">Load More</span>
+      </my-button>
+    </div>
   </div>
 </template>
 
