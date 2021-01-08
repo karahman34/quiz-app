@@ -13,11 +13,11 @@
     @endif
 
     {{-- User on session --}}
-    @if (session('session.working') === true)
+    @if ($onTest)
         <div class="bg-yellow-500 py-2 px-3 rounded text-white mb-2">
             <span class="inline-block mr-1 mdi mdi-information"></span>
             You are currently in a session.
-            <a class="underline font-medium" href="{{ route('session.start', ['session' => session('session.code')]) }}">Reconnect</a>
+            <a class="underline font-medium" href="{{ route('session.start', ['session' => $testCode]) }}">Reconnect</a>
         </div>
     @endif
 

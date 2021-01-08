@@ -122,7 +122,7 @@
                   {{ createdTime(session.created_at) }}
                 </td>
 
-                <td class="px-1 text-center">
+                <td class="px-1 text-center border border-gray-400">
                   <!-- Delete -->
                   <span
                     class="mdi mdi-trash-can cursor-pointer text-red-600 text-lg"

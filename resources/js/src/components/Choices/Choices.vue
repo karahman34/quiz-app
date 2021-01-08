@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-8">
+  <div class="ml-3 lg:ml-8">
     <!-- Form Modal -->
     <form-modal
       v-if="showFormModal"

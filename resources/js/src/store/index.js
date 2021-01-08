@@ -21,10 +21,14 @@ export default new Vuex.Store({
     },
     SET_QUIZZES(state, quizzesIds) {
       state.quizzes = quizzesIds;
-      state.answers = [];
     },
     SET_ANSWERS(state, {index, choiceId}) {
       Vue.set(state.answers, index, choiceId)
+    },
+    CLEAR(state) {
+      state.session = null
+      state.quizzes = []
+      state.answers = []
     }
   },
   actions: {
@@ -35,9 +39,7 @@ export default new Vuex.Store({
           answers: state.answers,
         })
 
-        commit('SET_SESSION', null)
-        commit('SET_QUIZZES', [])
-        commit('SET_ANSWERS', [])
+        commit('CLEAR', null)
 
         return Promise.resolve(res)
       } catch (err) {

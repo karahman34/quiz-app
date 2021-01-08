@@ -112,7 +112,7 @@ export default {
 
   data() {
     return {
-      dateNow: null,
+      dateNow: new Date,
       activeQuizIndex: 0,
       finishLoading: false,
       alertMessage: null,
@@ -121,6 +121,7 @@ export default {
 
   computed: {
     ...mapState({
+      sessionState: state => state.session,
       quizOrderIds: (state) => state.quizzes,
       answers: (state) => state.answers,
     }),
@@ -157,16 +158,30 @@ export default {
     },
   },
 
-  created() {
-    this.dateNow = new Date();
+  mounted() {
+    setInterval(() => (this.dateNow = new Date()), 1000);
 
-    if (!this.quizOrderIds.length) {
-      this.feedVuex();
+    // Feed vuex
+    if (this.sessionState === null || this.session.code !== this.sessionState.code) {
+      this.clearStates();
+      this.setSession();
+      this.setQuizzes();
     }
   },
 
-  mounted() {
-    setInterval(() => (this.dateNow = new Date()), 1000);
+  watch: {
+    timeLeft() {
+      const [hours, minutes] = this.session.available_for.split(':')
+      const sessionEndAt = new Date(this.session.created_at)
+      sessionEndAt.setHours(sessionEndAt.getHours() + parseInt(hours))
+      sessionEndAt.setMinutes(sessionEndAt.getMinutes() + parseInt(minutes))
+
+      const now = new Date()
+      if (now > sessionEndAt) {
+        alert('test is over!')
+        this.finishSession()
+      }
+    },
   },
 
   methods: {
@@ -174,14 +189,16 @@ export default {
       setQuizzesMutation: "SET_QUIZZES",
       setSessionMutation: "SET_SESSION",
       setAnswerMutation: "SET_ANSWERS",
+      clearStates: "CLEAR",
     }),
     ...mapActions({
       finishSessionAction: "finishSession",
     }),
-    feedVuex() {
+    setSession() {
       // Set session
       this.setSessionMutation(this.session);
-
+    },
+    setQuizzes() {
       // Shuffle quiz
       const quizIds = this.session.packet.quizzes.map((quiz) => quiz.id);
       const shuffledQuizIds = quizIds.sort(() => Math.random() - 0.5);
@@ -205,6 +222,7 @@ export default {
       }
     },
     async finishSession() {
+      if (this.finishLoading === true) return;
       this.finishLoading = true;
 
       // Replace the undefined answers

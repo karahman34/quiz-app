@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-2 my-2 rounded shadow-sm text-lg font-medium" :class="[additionalClass]">
+  <div class="px-4 py-2 my-2 rounded shadow-sm text-lg" :class="[additionalClass]">
     <div class="flex justify-between">
       <!-- Left -->
       <div>

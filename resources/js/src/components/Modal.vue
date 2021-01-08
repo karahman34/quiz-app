@@ -15,7 +15,8 @@
       <div class="bg-white rounded px-4 py-3">
         <!-- Slot Header -->
         <div
-          class="text-xl text-gray-800 font-medium mb-2 border-b border-gray-300"
+          class="text-xl text-gray-800 font-medium mb-2"
+          :class="{'border-b border-gray-300': hasHeaderSlot}"
         >
           <slot name="header"></slot>
         </div>
@@ -49,6 +50,9 @@ export default {
       }
 
       return classes;
+    },
+    hasHeaderSlot() {
+      return !!this.$slots['header']
     },
   },
 

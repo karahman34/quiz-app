@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TestSession;
 use App\Helpers\Transformer;
 use App\Http\Resources\SessionResource;
 use App\Jobs\CreateActivityJob;
@@ -78,23 +79,25 @@ class SessionController extends Controller
      */
     public function join(Request $request)
     {
+        // Return the view
         if (strtolower($request->method()) !== 'post') {
-            if ($request->session()->get('session.working') === true) {
+            $onTest = TestSession::getWorking();
+            if ($onTest) {
                 return redirect()->route('session.start', [
-                    'session' => $request->session()->get('session.code')
+                    'session' => TestSession::getCode(),
                 ]);
             }
 
             return view('join-session');
         }
 
-        $request->validate([
+        $payload = $request->validate([
             'code' => 'required|string'
         ]);
 
         try {
             // Get session
-            $session = Session::where('code', $request->get('code'))
+            $session = Session::where('code', $payload['code'])
                                 ->where('status', 'on_going')
                                 ->firstOrFail();
 
@@ -107,15 +110,21 @@ class SessionController extends Controller
             $now = Carbon::now();
             $auth = Auth::user();
             $joined = $session->participants()->wherePivot('user_id', Auth::id())->exists();
-            if (!$joined) {
-                $session->participants()->attach($auth->id, [
-                    'status' => 'on_going',
-                    'joined_at' => $now,
-                ]);
-
-                $request->session()->put('session.working', true);
-                $request->session()->put('session.code', $request->get('code'));
+            if ($joined) {
+                return Transformer::fail('You already join the session', null, 400);
             }
+
+            $session->participants()->attach($auth->id, [
+                'status' => 'on_going',
+                'joined_at' => $now,
+            ]);
+
+            TestSession::setWorking(true);
+            TestSession::setCode($payload['code']);
+            TestSession::setEndAt($session);
+
+            // Create activity
+            CreateActivityJob::dispatch(Auth::user(), "You entered session #{$session->code}.");
 
             return Transformer::ok('Success to join the session.');
         } catch (ModelNotFoundException $th) {
@@ -134,7 +143,7 @@ class SessionController extends Controller
      */
     public function start(Session $session)
     {
-        if (session('session.working') !== true) {
+        if (TestSession::getWorking() !== true || TestSession::getCode() !== $session->code) {
             return abort(403);
         }
 
@@ -204,9 +213,8 @@ class SessionController extends Controller
         try {
             // Check submit time
             $now = Carbon::now();
-            $explodedAvailableFor = explode(':', $session->available_for);
-            $session_end_at = Carbon::parse($session->created_at)->addHours($explodedAvailableFor[0])->addMinutes($explodedAvailableFor[1]);
-            if ($now > $session_end_at) {
+            $session_end_at = TestSession::getEndAt();
+            if ($now->subMinute() > $session_end_at) {
                 return Transformer::fail('The session is already over.', null, 403);
             }
 
@@ -227,8 +235,9 @@ class SessionController extends Controller
                 'finished_at' => $now,
             ]);
 
-            $request->session()->forget('session.working');
-            $request->session()->forget('session.code');
+            TestSession::setCode(null);
+            TestSession::setWorking(false);
+            TestSession::setEndAt(null);
             $request->session()->flash('session.success', true);
 
             // Create activity

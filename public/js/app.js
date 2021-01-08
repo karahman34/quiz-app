@@ -5138,6 +5138,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     size: {
@@ -5156,6 +5157,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return classes;
+    },
+    hasHeaderSlot: function hasHeaderSlot() {
+      return !!this.$slots['header'];
     }
   },
   methods: {
@@ -7770,13 +7774,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      dateNow: null,
+      dateNow: new Date(),
       activeQuizIndex: 0,
       finishLoading: false,
       alertMessage: null
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    sessionState: function sessionState(state) {
+      return state.session;
+    },
     quizOrderIds: function quizOrderIds(state) {
       return state.quizzes;
     },
@@ -7819,31 +7826,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }) ? true : false;
     }
   }),
-  created: function created() {
-    this.dateNow = new Date();
-
-    if (!this.quizOrderIds.length) {
-      this.feedVuex();
-    }
-  },
   mounted: function mounted() {
     var _this2 = this;
 
     setInterval(function () {
       return _this2.dateNow = new Date();
-    }, 1000);
+    }, 1000); // Feed vuex
+
+    if (this.sessionState === null || this.session.code !== this.sessionState.code) {
+      this.clearStates();
+      this.setSession();
+      this.setQuizzes();
+    }
+  },
+  watch: {
+    timeLeft: function timeLeft() {
+      var _this$session$availab3 = this.session.available_for.split(':'),
+          _this$session$availab4 = _slicedToArray(_this$session$availab3, 2),
+          hours = _this$session$availab4[0],
+          minutes = _this$session$availab4[1];
+
+      var sessionEndAt = new Date(this.session.created_at);
+      sessionEndAt.setHours(sessionEndAt.getHours() + parseInt(hours));
+      sessionEndAt.setMinutes(sessionEndAt.getMinutes() + parseInt(minutes));
+      var now = new Date();
+
+      if (now > sessionEndAt) {
+        alert('test is over!');
+        this.finishSession();
+      }
+    }
   },
   methods: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])({
     setQuizzesMutation: "SET_QUIZZES",
     setSessionMutation: "SET_SESSION",
-    setAnswerMutation: "SET_ANSWERS"
+    setAnswerMutation: "SET_ANSWERS",
+    clearStates: "CLEAR"
   })), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])({
     finishSessionAction: "finishSession"
   })), {}, {
-    feedVuex: function feedVuex() {
+    setSession: function setSession() {
       // Set session
-      this.setSessionMutation(this.session); // Shuffle quiz
-
+      this.setSessionMutation(this.session);
+    },
+    setQuizzes: function setQuizzes() {
+      // Shuffle quiz
       var quizIds = this.session.packet.quizzes.map(function (quiz) {
         return quiz.id;
       });
@@ -7873,6 +7900,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (!(_this3.finishLoading === true)) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 2:
                 _this3.finishLoading = true; // Replace the undefined answers
 
                 for (i = 0; i < _this3.answers.length; i++) {
@@ -7886,31 +7921,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   }
                 }
 
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 4;
+                _context.next = 7;
                 return _this3.finishSessionAction();
 
-              case 5:
+              case 7:
                 window.location.href = "/dashboard";
-                _context.next = 11;
+                _context.next = 13;
                 break;
 
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](2);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](4);
                 _this3.alertMessage = (_context.t0 === null || _context.t0 === void 0 ? void 0 : (_err$response = _context.t0.response) === null || _err$response === void 0 ? void 0 : (_err$response$data = _err$response.data) === null || _err$response$data === void 0 ? void 0 : _err$response$data.message) || "Failed to finish the session.";
 
-              case 11:
-                _context.prev = 11;
+              case 13:
+                _context.prev = 13;
                 _this3.finishLoading = false;
-                return _context.finish(11);
+                return _context.finish(13);
 
-              case 14:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 8, 11, 14]]);
+        }, _callee, null, [[4, 10, 13, 16]]);
       }))();
     }
   })
@@ -48191,7 +48226,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "px-4 py-2 my-2 rounded shadow-sm text-lg font-medium",
+      staticClass: "px-4 py-2 my-2 rounded shadow-sm text-lg",
       class: [_vm.additionalClass]
     },
     [
@@ -48351,7 +48386,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "ml-8" },
+    { staticClass: "ml-3 lg:ml-8" },
     [
       _vm.showFormModal
         ? _c("form-modal", {
@@ -49061,7 +49096,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "span",
-    { staticClass: "inline-block text-sm font-medium text-red-600 mt-0.5" },
+    { staticClass: "inline-block text-sm text-red-600 mt-0.5" },
     [_vm._t("default")],
     2
   )
@@ -49109,8 +49144,8 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass:
-                  "text-xl text-gray-800 font-medium mb-2 border-b border-gray-300"
+                staticClass: "text-xl text-gray-800 font-medium mb-2",
+                class: { "border-b border-gray-300": _vm.hasHeaderSlot }
               },
               [_vm._t("header")],
               2
@@ -50438,18 +50473,25 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _c("td", { staticClass: "px-1 text-center" }, [
-                                _c("span", {
+                              _c(
+                                "td",
+                                {
                                   staticClass:
-                                    "mdi mdi-trash-can cursor-pointer text-red-600 text-lg",
-                                  on: {
-                                    click: function($event) {
-                                      ;(_vm.deleteSessionModal = true),
-                                        (_vm.focusSession = session)
+                                    "px-1 text-center border border-gray-400"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "mdi mdi-trash-can cursor-pointer text-red-600 text-lg",
+                                    on: {
+                                      click: function($event) {
+                                        ;(_vm.deleteSessionModal = true),
+                                          (_vm.focusSession = session)
+                                      }
                                     }
-                                  }
-                                })
-                              ])
+                                  })
+                                ]
+                              )
                             ])
                           })
                     ],
@@ -67533,12 +67575,16 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_4__["default"]({
     },
     SET_QUIZZES: function SET_QUIZZES(state, quizzesIds) {
       state.quizzes = quizzesIds;
-      state.answers = [];
     },
     SET_ANSWERS: function SET_ANSWERS(state, _ref) {
       var index = _ref.index,
           choiceId = _ref.choiceId;
       vue__WEBPACK_IMPORTED_MODULE_2___default.a.set(state.answers, index, choiceId);
+    },
+    CLEAR: function CLEAR(state) {
+      state.session = null;
+      state.quizzes = [];
+      state.answers = [];
     }
   },
   actions: {
@@ -67559,22 +67605,20 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
               case 4:
                 res = _context.sent;
-                commit('SET_SESSION', null);
-                commit('SET_QUIZZES', []);
-                commit('SET_ANSWERS', []);
+                commit('CLEAR', null);
                 return _context.abrupt("return", Promise.resolve(res));
 
-              case 11:
-                _context.prev = 11;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 return _context.abrupt("return", Promise.reject(_context.t0));
 
-              case 14:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 11]]);
+        }, _callee, null, [[1, 9]]);
       }))();
     }
   },
