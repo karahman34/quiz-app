@@ -1,6 +1,6 @@
 <template>
   <button
-    class="py-1 px-3 rounded font-semibold focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed"
+    class="py-1 px-3 rounded focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed"
     :class="[additionalClasses]"
     :type="type"
     :disabled="disabled || loading"
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       colors: {
-        primary: "bg-indigo-600 hover:bg-indigo-700",
+        primary: "bg-indigo-700 hover:bg-indigo-800",
         danger: "bg-red-600 hover:bg-red-700",
         white: "bg-white hover:bg-gray-300",
         dark: "bg-gray-800 hover:bg-gray-700",

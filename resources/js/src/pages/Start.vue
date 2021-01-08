@@ -17,7 +17,7 @@
         <span class="flex-shrink-0 mdi mdi-book text-2xl"></span>
         <div>
           <!-- Title -->
-          <span class="text-2xl font-semibold">{{ session.packet.title }}</span>
+          <span class="text-2xl">{{ session.packet.title }}</span>
           <!-- Meta -->
           <div class="text-gray-600">
             <!-- Quizzes Count -->

@@ -4245,7 +4245,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       colors: {
-        primary: "bg-indigo-600 hover:bg-indigo-700",
+        primary: "bg-indigo-700 hover:bg-indigo-800",
         danger: "bg-red-600 hover:bg-red-700",
         white: "bg-white hover:bg-gray-300",
         dark: "bg-gray-800 hover:bg-gray-700",
@@ -48191,7 +48191,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "px-4 py-2 my-2 rounded shadow-sm text-lg font-semibold",
+      staticClass: "px-4 py-2 my-2 rounded shadow-sm text-lg font-medium",
       class: [_vm.additionalClass]
     },
     [
@@ -48238,7 +48238,7 @@ var render = function() {
     "button",
     {
       staticClass:
-        "py-1 px-3 rounded font-semibold focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed",
+        "py-1 px-3 rounded focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed",
       class: [_vm.additionalClasses],
       attrs: { type: _vm.type, disabled: _vm.disabled || _vm.loading },
       on: {
@@ -49032,7 +49032,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "label",
-    { staticClass: "block text-base font-semibold mb-0.5" },
+    { staticClass: "block text-base mb-0.5" },
     [_vm._t("default")],
     2
   )
@@ -49110,7 +49110,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "text-xl text-gray-800 font-semibold mb-2 border-b border-gray-300"
+                  "text-xl text-gray-800 font-medium mb-2 border-b border-gray-300"
               },
               [_vm._t("header")],
               2
@@ -49150,7 +49150,7 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "font-medium text-lg",
+          staticClass: "text-gray-700 text-lg",
           attrs: { href: "/packets/" + _vm.packet.id }
         },
         [_vm._v(_vm._s(_vm.packet.title))]
@@ -49451,6 +49451,7 @@ var render = function() {
               _c(
                 "my-button",
                 {
+                  staticClass: "font-medium",
                   attrs: { dark: "" },
                   on: {
                     click: function($event) {
@@ -49534,19 +49535,24 @@ var render = function() {
       _vm._v(" "),
       _vm.next && !_vm.loading
         ? _c(
-            "my-button",
-            {
-              staticClass: "w-full opacity-70 hover:opacity-100",
-              attrs: { dark: "" },
-              on: { click: _vm.getPackets }
-            },
+            "div",
+            { staticClass: "flex justify-center mt-4" },
             [
-              _c("span", { staticClass: "mdi mdi-eye" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "inline-block ml-1" }, [
-                _vm._v("Load More")
-              ])
-            ]
+              _c(
+                "my-button",
+                {
+                  staticClass: "py-1 font-medium",
+                  attrs: { dark: "" },
+                  on: { click: _vm.getPackets }
+                },
+                [
+                  _c("span", { staticClass: "inline-block ml-1" }, [
+                    _vm._v("Load More")
+                  ])
+                ]
+              )
+            ],
+            1
           )
         : _vm._e()
     ],
@@ -50212,7 +50218,7 @@ var render = function() {
                       _c(
                         "my-button",
                         {
-                          staticClass: "py-1 uppercase text font-semibold",
+                          staticClass: "py-1 uppercase text font-medium",
                           attrs: {
                             dark: "",
                             color: "success",
@@ -50364,7 +50370,7 @@ var render = function() {
                                         "span",
                                         {
                                           staticClass:
-                                            "cursor-pointer text-blue-500 font-semibold",
+                                            "cursor-pointer text-blue-500 font-medium",
                                           on: {
                                             click: function($event) {
                                               ;(_vm.participantsModal = true),
@@ -50861,7 +50867,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._l(_vm.quiz.choices, function(choice) {
-        return _c("div", { key: choice.id, staticClass: "pl-5" }, [
+        return _c("div", { key: choice.id, staticClass: "my-1 pl-2 lg:pl-5" }, [
           choice.image !== null && choice.image.url !== null
             ? _c("img", {
                 staticClass: "max-h-96 mb-2",
@@ -51050,7 +51056,7 @@ var render = function() {
                 })
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "text-2xl font-semibold" }, [
+            _c("div", { staticClass: "text-2xl font-medium" }, [
               _vm._v("We found it!")
             ]),
             _vm._v(" "),
@@ -51062,7 +51068,7 @@ var render = function() {
                   _c("div", { staticClass: "col-span-3" }, [
                     _c(
                       "div",
-                      { staticClass: "font-semibold flex justify-between" },
+                      { staticClass: "font-medium flex justify-between" },
                       [
                         _c("span", [_vm._v(_vm._s(key))]),
                         _vm._v(" "),
@@ -51119,7 +51125,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-xl font-semibold mb-3" }, [
+    return _c("div", { staticClass: "text-xl font-medium mb-3" }, [
       _c("span", { staticClass: "mdi mdi-share" }),
       _vm._v("\n    Join Session\n  ")
     ])
@@ -51465,7 +51471,7 @@ var render = function() {
             _c("span", { staticClass: "flex-shrink-0 mdi mdi-book text-2xl" }),
             _vm._v(" "),
             _c("div", [
-              _c("span", { staticClass: "text-2xl font-semibold" }, [
+              _c("span", { staticClass: "text-2xl" }, [
                 _vm._v(_vm._s(_vm.session.packet.title))
               ]),
               _vm._v(" "),
@@ -67595,9 +67601,9 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_4__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/dev/quiz/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/html/dev/quiz/resources/sass/additional.scss */"./resources/sass/additional.scss");
-module.exports = __webpack_require__(/*! /var/www/html/dev/quiz/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /var/www/html/showcase/quiz/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/html/showcase/quiz/resources/sass/additional.scss */"./resources/sass/additional.scss");
+module.exports = __webpack_require__(/*! /var/www/html/showcase/quiz/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -17,7 +17,7 @@
     </span>
 
     <!-- Choices -->
-    <div v-for="choice in quiz.choices" :key="choice.id" class="pl-5">
+    <div v-for="choice in quiz.choices" :key="choice.id" class="my-1 pl-2 lg:pl-5">
       <!-- Image -->
       <img
         v-if="choice.image !== null && choice.image.url !== null"

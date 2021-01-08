@@ -15,7 +15,7 @@
       <div class="bg-white rounded px-4 py-3">
         <!-- Slot Header -->
         <div
-          class="text-xl text-gray-800 font-semibold mb-2 border-b border-gray-300"
+          class="text-xl text-gray-800 font-medium mb-2 border-b border-gray-300"
         >
           <slot name="header"></slot>
         </div>

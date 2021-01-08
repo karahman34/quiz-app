@@ -36,7 +36,7 @@
 
       <div>
         <!-- Create Button -->
-        <my-button dark @click="packetFormModal = true">
+        <my-button dark class="font-medium" @click="packetFormModal = true">
           <span class="mdi mdi-plus"></span>
           <span>Packet</span>
         </my-button>
@@ -94,7 +94,7 @@
     <div v-if="next && !loading" class="flex justify-center mt-4">
       <my-button
         dark
-        class="opacity-70 py-1 font-semibold"
+        class="py-1 font-medium"
         @click="getPackets"
       >
         <span class="inline-block ml-1">Load More</span>

@@ -39,7 +39,7 @@
             <my-button
               dark
               color="success"
-              class="py-1 uppercase text font-semibold"
+              class="py-1 uppercase text font-medium"
               :disabled="onGoingSession"
               @click="createSessionModal = true"
             >
@@ -101,7 +101,7 @@
 
                   <span
                     v-else
-                    class="cursor-pointer text-blue-500 font-semibold"
+                    class="cursor-pointer text-blue-500 font-medium"
                     @click="
                       (participantsModal = true), (focusSession = session)
                     "

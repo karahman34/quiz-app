@@ -2,7 +2,7 @@
   <div class="px-4 py-2 bg-white shadow-md rounded">
     <div class="flex">
       <!-- Title -->
-      <a :href="`/packets/${packet.id}`" class="font-medium text-lg">{{
+      <a :href="`/packets/${packet.id}`" class="text-gray-700 text-lg">{{
         packet.title
       }}</a>
 

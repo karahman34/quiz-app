@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded shadow px-4 py-3 w-full lg:w-3/4 xl:w-1/2">
-    <div class="text-xl font-semibold mb-3">
+    <div class="text-xl font-medium mb-3">
       <span class="mdi mdi-share"></span>
       Join Session
     </div>
@@ -46,7 +46,7 @@
         @close="failedJoinMessage = null"
       ></alert>
 
-      <div class="text-2xl font-semibold">We found it!</div>
+      <div class="text-2xl font-medium">We found it!</div>
 
       <!-- Key & Value -->
       <div
@@ -56,7 +56,7 @@
       >
         <!-- Key -->
         <div class="col-span-3">
-          <div class="font-semibold flex justify-between">
+          <div class="font-medium flex justify-between">
             <span>{{ key }}</span>
             <span>:</span>
           </div>

@@ -1,7 +1,17 @@
-@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;
+
+0,
+300;0,
+400;0,
+600;0,
+700;1,
+200;1,
+300;1,
+400;1,
+600;1,
+700&display=swap);@charset "UTF-8";
 
 /* MaterialDesignIcons.com */
-
 @font-face {
   font-family: "Material Design Icons";
   src: url(/fonts/vendor/@mdi/materialdesignicons-webfont.eot?3d1f8fa2f06249540889a7bbe69cf5bb);
@@ -23678,5 +23688,9 @@
   100% {
     transform: rotate(359deg);
   }
+}
+
+body {
+  font-family: "Nunito", sans-serif;
 }
 
