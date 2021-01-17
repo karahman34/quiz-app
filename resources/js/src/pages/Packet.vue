@@ -5,13 +5,13 @@
       <div class="flex justify-between gap-2">
         <!-- Icon -->
         <div>
-          <span class="mdi mdi-book text-2xl"></span>
+          <span class="mdi mdi-book text-xl lg:text-2xl"></span>
         </div>
 
         <!-- Meta -->
         <div>
           <!-- Title -->
-          <span class="block text-2xl">
+          <span class="block text-xl lg:text-2xl">
             {{ packet.title }}
           </span>
 

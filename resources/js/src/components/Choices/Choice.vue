@@ -11,7 +11,7 @@
       </a>
     </template>
 
-    <div class="flex gap-3 text-gray-700">
+    <div class="flex gap-3 text-base text-gray-700 lg:text-lg">
       <div>
         <!-- Input Right Choice -->
         <slot name="input"></slot>

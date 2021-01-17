@@ -14,7 +14,7 @@
       />
     </a>
 
-    <div class="text-lg">
+    <div class="text-base lg:text-lg">
       <!-- Index -->
       <span>{{ index + 1 }}. </span>
 
