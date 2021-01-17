@@ -19,6 +19,9 @@
         {{-- Additional --}}
         <link rel="stylesheet" href="{{ asset('css/additional.css') }}">
 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
@@ -28,14 +31,14 @@
             @csrf
         </form>
         
-        <div class="bg-gray-100 min-h-screen">
+        <div id="app" class="bg-gray-100 min-h-screen">
             {{-- Navigation --}}
             <div class="sticky top-0 z-50">
-                @include('layouts.navigation')
+                <top-navigation @auth :auth="{{ Auth::user() }}" @endauth></top-navigation>
             </div>
 
             <!-- Page Content -->
-            <main id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex gap-10 relative">
                     {{-- Left Navigation --}}
                     <div class="flex-shrink-0 min-h-screen hidden md:block">

@@ -35,6 +35,7 @@ Vue.component('join-session-page', require('./src/pages/JoinSession.vue').defaul
 Vue.component('start-page', require('./src/pages/Start.vue').default)
 
 // Components
+Vue.component('top-navigation', require('./src/components/Navigations/TopNavigation.vue').default)
 Vue.component('dropdown', require('./src/components/Form/Dropdown.vue').default)
 Vue.component('dropdown-link', require('./src/components/Form/DropdownLink.vue').default)
 Vue.component('dropdown-divider', require('./src/components/Form/DropdownDivider.vue').default)

@@ -1,13 +1,12 @@
 require('./bootstrap');
 
-require('alpinejs');
-
 document.addEventListener("DOMContentLoaded", function() {
-  // Logout Button
-  const logoutButton = document.querySelector('.logout-button')
-  if (logoutButton) {
-    const logoutForm = document.querySelector('form#logout-form')
-    logoutButton.addEventListener('click', () => {
+  // Logout button listener
+  const logoutForm = document.querySelector('form#logout-form')
+  const logoutButtons = document.querySelectorAll('.logout-button')
+  for (let i = 0; i < logoutButtons.length; i++) {
+    const el = logoutButtons[i];
+    el.addEventListener('click', () => {
       logoutForm.submit();
     });
   }
