@@ -7757,6 +7757,79 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7777,7 +7850,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dateNow: new Date(),
       activeQuizIndex: 0,
       finishLoading: false,
-      alertMessage: null
+      alertMessage: null,
+      quizStyle: "card" // or list
+
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -7841,7 +7916,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     timeLeft: function timeLeft() {
-      var _this$session$availab3 = this.session.available_for.split(':'),
+      var _this$session$availab3 = this.session.available_for.split(":"),
           _this$session$availab4 = _slicedToArray(_this$session$availab3, 2),
           hours = _this$session$availab4[0],
           minutes = _this$session$availab4[1];
@@ -7852,7 +7927,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var now = new Date();
 
       if (now > sessionEndAt) {
-        alert('test is over!');
+        alert("test is over!");
         this.finishSession();
       }
     }
@@ -51509,7 +51584,7 @@ var render = function() {
         "div",
         { staticClass: "bg-white rounded shadow px-5 py-3" },
         [
-          _c("div", { staticClass: "flex gap-3 mb-3" }, [
+          _c("div", { staticClass: "flex gap-3" }, [
             _c("span", { staticClass: "flex-shrink-0 mdi mdi-book text-2xl" }),
             _vm._v(" "),
             _c("div", [
@@ -51539,121 +51614,247 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("quiz", {
-            staticClass: "block",
-            attrs: {
-              quiz: _vm.activeQuiz,
-              index: _vm.activeQuizIndex,
-              answers: _vm.answers
-            }
-          }),
-          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "flex items-center gap-2 mt-3" },
+            {
+              staticClass:
+                "flex flex-col items-center justify-between gap-2 my-2 md:flex-row"
+            },
             [
+              _c("div", { staticClass: "flex items-center gap-x-2" }, [
+                _c("span", [_vm._v("Style: ")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "px-2 cursor-pointer bg-white rounded border border-gray-500",
+                    class: {
+                      "text-white bg-blue-500 hover:bg-blue-400 hover":
+                        _vm.quizStyle === "card",
+                      "hover:bg-gray-200": _vm.quizStyle !== "card"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.quizStyle = "card"
+                      }
+                    }
+                  },
+                  [_c("span", { staticClass: "mdi mdi-card-text text-xl" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "px-2 cursor-pointer bg-white rounded border border-gray-500",
+                    class: {
+                      "text-white bg-blue-500 hover:bg-blue-400":
+                        _vm.quizStyle === "list",
+                      "hover:bg-gray-200": _vm.quizStyle !== "list"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.quizStyle = "list"
+                      }
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "mdi mdi-format-list-bulleted text-xl"
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
               _c(
-                "select",
+                "div",
                 {
-                  directives: [
+                  staticClass:
+                    "flex flex-wrap items-center gap-y-1 gap-x-1 md:gap-x-2 md:gap-y-0"
+                },
+                [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.activeQuizIndex,
-                      expression: "activeQuizIndex"
-                    }
-                  ],
-                  staticClass: "py-1 border rounded",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.activeQuizIndex = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.quizzes.length, function(n) {
-                  return _c("option", { key: n, domProps: { value: n - 1 } }, [
-                    _c("span", [_vm._v(_vm._s(n))]),
-                    _vm._v(" "),
-                    !_vm.answers[n - 1]
-                      ? _c("span", [_vm._v(" - Empty")])
-                      : _vm._e()
-                  ])
-                }),
-                0
-              ),
-              _vm._v(" "),
-              _c(
-                "my-button",
-                {
-                  attrs: {
-                    dark: "",
-                    color: "link",
-                    disabled: _vm.activeQuizIndex === 0
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.activeQuizIndex--
-                    }
-                  }
-                },
-                [
-                  _c("span", { staticClass: "mdi mdi-chevron-left" }),
-                  _vm._v("\n        Previous\n      ")
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "my-button",
-                {
-                  attrs: {
-                    dark: "",
-                    color: "link",
-                    disabled: _vm.activeQuizIndex === _vm.quizzes.length - 1
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.activeQuizIndex++
-                    }
-                  }
-                },
-                [
-                  _vm._v("\n        Next\n        "),
-                  _c("span", { staticClass: "mdi mdi-chevron-right" })
-                ]
-              ),
-              _vm._v(" "),
-              _vm.showFinishButton
-                ? _c(
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.activeQuizIndex,
+                          expression: "activeQuizIndex"
+                        },
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.quizStyle === "card",
+                          expression: "quizStyle === 'card'"
+                        }
+                      ],
+                      staticClass:
+                        "py-1 border rounded disabled:bg-gray-300 disabled:cursor-not-allowed",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.activeQuizIndex = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    _vm._l(_vm.quizzes.length, function(n) {
+                      return _c(
+                        "option",
+                        { key: n, domProps: { value: n - 1 } },
+                        [
+                          _c("span", [_vm._v(_vm._s(n))]),
+                          _vm._v(" "),
+                          !_vm.answers[n - 1]
+                            ? _c("span", [_vm._v(" - Empty")])
+                            : _vm._e()
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "my-button",
                     {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.quizStyle === "card",
+                          expression: "quizStyle === 'card'"
+                        }
+                      ],
+                      staticClass: "flex-grow-0",
                       attrs: {
                         dark: "",
-                        color: "bg-yellow-500 hover:bg-yellow-600",
-                        loading: _vm.finishLoading
+                        color: "link",
+                        disabled: _vm.activeQuizIndex === 0
                       },
-                      on: { click: _vm.confirmFinish }
+                      on: {
+                        click: function($event) {
+                          _vm.activeQuizIndex--
+                        }
+                      }
                     },
                     [
-                      _c("span", { staticClass: "mdi mdi-flag" }),
-                      _vm._v("\n        Finish\n      ")
+                      _c("span", {
+                        staticClass: "hidden mdi mdi-chevron-left md:block"
+                      }),
+                      _vm._v("\n          Previous\n        ")
                     ]
-                  )
-                : _vm._e()
-            ],
-            1
-          )
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "my-button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.quizStyle === "card",
+                          expression: "quizStyle === 'card'"
+                        }
+                      ],
+                      attrs: {
+                        dark: "",
+                        color: "link",
+                        disabled: _vm.activeQuizIndex === _vm.quizzes.length - 1
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.activeQuizIndex++
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n          Next\n          "),
+                      _c("span", {
+                        staticClass: "hidden mdi mdi-chevron-right md:block"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.showFinishButton
+                    ? _c(
+                        "my-button",
+                        {
+                          attrs: {
+                            dark: "",
+                            color: "bg-yellow-500 hover:bg-yellow-600",
+                            loading: _vm.finishLoading
+                          },
+                          on: { click: _vm.confirmFinish }
+                        },
+                        [
+                          _c("span", {
+                            staticClass: "hidden mdi mdi-flag md:block"
+                          }),
+                          _vm._v("\n          Finish\n        ")
+                        ]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm.quizStyle === "card"
+            ? _c("quiz", {
+                staticClass: "block",
+                attrs: {
+                  quiz: _vm.activeQuiz,
+                  index: _vm.activeQuizIndex,
+                  answers: _vm.answers
+                }
+              })
+            : [
+                _c(
+                  "div",
+                  { staticClass: "flex flex-col gap-y-2" },
+                  _vm._l(_vm.quizzes, function(quiz, index) {
+                    return _c("quiz", {
+                      key: quiz.id,
+                      staticClass: "block",
+                      attrs: { quiz: quiz, index: index, answers: _vm.answers }
+                    })
+                  }),
+                  1
+                ),
+                _vm._v(" "),
+                _vm.showFinishButton
+                  ? _c(
+                      "my-button",
+                      {
+                        staticClass: "mt-2",
+                        attrs: {
+                          dark: "",
+                          color: "bg-yellow-500 hover:bg-yellow-600",
+                          loading: _vm.finishLoading
+                        },
+                        on: { click: _vm.confirmFinish }
+                      },
+                      [
+                        _c("span", { staticClass: "mdi mdi-flag" }),
+                        _vm._v("\n        Finish\n      ")
+                      ]
+                    )
+                  : _vm._e()
+              ]
         ],
-        1
+        2
       )
     ],
     1

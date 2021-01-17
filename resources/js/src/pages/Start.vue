@@ -12,7 +12,7 @@
     <!-- The Card -->
     <div class="bg-white rounded shadow px-5 py-3">
       <!-- Header -->
-      <div class="flex gap-3 mb-3">
+      <div class="flex gap-3">
         <!-- Icon -->
         <span class="flex-shrink-0 mdi mdi-book text-2xl"></span>
         <div>
@@ -35,50 +35,123 @@
         </div>
       </div>
 
+      <!-- Support Buttons -->
+      <div
+        class="flex flex-col items-center justify-between gap-2 my-2 md:flex-row"
+      >
+        <!-- Left -->
+        <div class="flex items-center gap-x-2">
+          <!-- Text -->
+          <span>Style: </span>
+
+          <!-- Card Style -->
+          <div
+            class="px-2 cursor-pointer bg-white rounded border border-gray-500"
+            :class="{
+              'text-white bg-blue-500 hover:bg-blue-400 hover':
+                quizStyle === 'card',
+              'hover:bg-gray-200': quizStyle !== 'card',
+            }"
+            @click="quizStyle = 'card'"
+          >
+            <span class="mdi mdi-card-text text-xl"></span>
+          </div>
+
+          <!-- List Style -->
+          <div
+            class="px-2 cursor-pointer bg-white rounded border border-gray-500"
+            :class="{
+              'text-white bg-blue-500 hover:bg-blue-400': quizStyle === 'list',
+              'hover:bg-gray-200': quizStyle !== 'list',
+            }"
+            @click="quizStyle = 'list'"
+          >
+            <span class="mdi mdi-format-list-bulleted text-xl"></span>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div
+          class="flex flex-wrap items-center gap-y-1 gap-x-1 md:gap-x-2 md:gap-y-0"
+        >
+          <!-- Select Quiz -->
+          <select
+            v-model="activeQuizIndex"
+            v-show="quizStyle === 'card'"
+            class="py-1 border rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            <option v-for="n in quizzes.length" :key="n" :value="n - 1">
+              <span>{{ n }}</span>
+              <span v-if="!answers[n - 1]"> - Empty</span>
+            </option>
+          </select>
+
+          <!-- Previous -->
+          <my-button
+            v-show="quizStyle === 'card'"
+            dark
+            color="link"
+            class="flex-grow-0"
+            :disabled="activeQuizIndex === 0"
+            @click="activeQuizIndex--"
+          >
+            <span class="hidden mdi mdi-chevron-left md:block"></span>
+            Previous
+          </my-button>
+
+          <!-- Next -->
+          <my-button
+            v-show="quizStyle === 'card'"
+            dark
+            color="link"
+            :disabled="activeQuizIndex === quizzes.length - 1"
+            @click="activeQuizIndex++"
+          >
+            Next
+            <span class="hidden mdi mdi-chevron-right md:block"></span>
+          </my-button>
+
+          <!-- Finish Button -->
+          <my-button
+            v-if="showFinishButton"
+            dark
+            color="bg-yellow-500 hover:bg-yellow-600"
+            :loading="finishLoading"
+            @click="confirmFinish"
+          >
+            <span class="hidden mdi mdi-flag md:block"></span>
+            Finish
+          </my-button>
+        </div>
+      </div>
+
       <!-- Quiz -->
       <quiz
+        v-if="quizStyle === 'card'"
         class="block"
         :quiz="activeQuiz"
         :index="activeQuizIndex"
         :answers="answers"
       ></quiz>
 
-      <!-- Support Buttons -->
-      <div class="flex items-center gap-2 mt-3">
-        <!-- Select Quiz -->
-        <select v-model="activeQuizIndex" class="py-1 border rounded">
-          <option v-for="n in quizzes.length" :key="n" :value="n - 1">
-            <span>{{ n }}</span>
-            <span v-if="!answers[n - 1]"> - Empty</span>
-          </option>
-        </select>
-
-        <!-- Previous -->
-        <my-button
-          dark
-          color="link"
-          :disabled="activeQuizIndex === 0"
-          @click="activeQuizIndex--"
-        >
-          <span class="mdi mdi-chevron-left"></span>
-          Previous
-        </my-button>
-
-        <!-- Next -->
-        <my-button
-          dark
-          color="link"
-          :disabled="activeQuizIndex === quizzes.length - 1"
-          @click="activeQuizIndex++"
-        >
-          Next
-          <span class="mdi mdi-chevron-right"></span>
-        </my-button>
+      <!-- List of Quizzes -->
+      <template v-else>
+        <div class="flex flex-col gap-y-2">
+          <quiz
+            v-for="(quiz, index) in quizzes"
+            :key="quiz.id"
+            class="block"
+            :quiz="quiz"
+            :index="index"
+            :answers="answers"
+          ></quiz>
+        </div>
 
         <!-- Finish Button -->
         <my-button
           v-if="showFinishButton"
           dark
+          class="mt-2"
           color="bg-yellow-500 hover:bg-yellow-600"
           :loading="finishLoading"
           @click="confirmFinish"
@@ -86,7 +159,7 @@
           <span class="mdi mdi-flag"></span>
           Finish
         </my-button>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -112,16 +185,17 @@ export default {
 
   data() {
     return {
-      dateNow: new Date,
+      dateNow: new Date(),
       activeQuizIndex: 0,
       finishLoading: false,
       alertMessage: null,
+      quizStyle: "card", // or list
     };
   },
 
   computed: {
     ...mapState({
-      sessionState: state => state.session,
+      sessionState: (state) => state.session,
       quizOrderIds: (state) => state.quizzes,
       answers: (state) => state.answers,
     }),
@@ -162,7 +236,10 @@ export default {
     setInterval(() => (this.dateNow = new Date()), 1000);
 
     // Feed vuex
-    if (this.sessionState === null || this.session.code !== this.sessionState.code) {
+    if (
+      this.sessionState === null ||
+      this.session.code !== this.sessionState.code
+    ) {
       this.clearStates();
       this.setSession();
       this.setQuizzes();
@@ -171,15 +248,15 @@ export default {
 
   watch: {
     timeLeft() {
-      const [hours, minutes] = this.session.available_for.split(':')
-      const sessionEndAt = new Date(this.session.created_at)
-      sessionEndAt.setHours(sessionEndAt.getHours() + parseInt(hours))
-      sessionEndAt.setMinutes(sessionEndAt.getMinutes() + parseInt(minutes))
+      const [hours, minutes] = this.session.available_for.split(":");
+      const sessionEndAt = new Date(this.session.created_at);
+      sessionEndAt.setHours(sessionEndAt.getHours() + parseInt(hours));
+      sessionEndAt.setMinutes(sessionEndAt.getMinutes() + parseInt(minutes));
 
-      const now = new Date()
+      const now = new Date();
       if (now > sessionEndAt) {
-        alert('test is over!')
-        this.finishSession()
+        alert("test is over!");
+        this.finishSession();
       }
     },
   },
